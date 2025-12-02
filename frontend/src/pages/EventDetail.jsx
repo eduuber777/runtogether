@@ -48,7 +48,6 @@ const EventDetail = () => {
                     <span>📅 {new Date(event.date).toLocaleDateString()}</span>
                     <span>📍 {event.location}</span>
                     <span>🏃 {event.distance} km</span>
-                    <span>💰 {event.price} €</span>
                 </div>
                 <p className="text-gray-700 leading-relaxed mb-8">{event.description}</p>
 

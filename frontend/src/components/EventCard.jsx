@@ -17,8 +17,7 @@ const EventCard = ({ event }) => {
                 <h3 className="text-xl font-bold text-gray-800 mb-2">{event.title}</h3>
                 <p className="text-gray-600 mb-4 line-clamp-2">{event.description}</p>
 
-                <div className="flex justify-between items-center">
-                    <span className="text-lg font-bold text-dark">{event.price} €</span>
+                <div className="flex justify-end items-center">
                     <Link
                         to={`/event/${event.id}`}
                         className="text-primary hover:text-dark font-medium"

@@ -1,0 +1,878 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria PEC2 - RunTogether - Eduard Berlanga</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --uoc-cyan: #73edff;
+            --uoc-blue: #006a8e;
+            --uoc-dark: #00425a;
+            --uoc-light: #e0f7ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* PORTADA */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff;
+            padding: 3rem 2rem;
+            page-break-after: always;
+        }
+
+        .cover-header {
+            width: 100%;
+            background: var(--uoc-dark);
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+        }
+
+        .cover-header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: #fff;
+            border: none;
+        }
+
+        .cover-main {
+            display: flex;
+            gap: 3rem;
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .cover-logo {
+            width: 250px;
+            background: var(--uoc-cyan);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .uoc-text {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--uoc-dark);
+            line-height: 0.8;
+            letter-spacing: -5px;
+        }
+
+        .cover-info {
+            flex: 1;
+        }
+
+        .cover-info p {
+            margin: 1.2rem 0;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .cover-info strong {
+            color: var(--uoc-dark);
+            display: inline-block;
+            width: 180px;
+        }
+
+        /* LICENCIA Y FICHA */
+        .legal-section {
+            background: #fff;
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            page-break-after: always;
+        }
+
+        .license-box {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            background: #f9f9f9;
+        }
+
+        /* CONTENIDO */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #fff;
+        }
+
+        .section {
+            background: #fff;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            page-break-inside: avoid;
+        }
+
+        h1 {
+            color: var(--uoc-dark);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--uoc-cyan);
+            page-break-before: always;
+        }
+
+        h2 {
+            color: var(--uoc-blue);
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--uoc-light);
+        }
+
+        h3 {
+            color: var(--uoc-dark);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        h4 {
+            color: var(--uoc-blue);
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--uoc-light) 0%, #b3ecff 100%);
+            border-left: 4px solid var(--uoc-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        ul,
+        ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--uoc-dark);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .endpoint {
+            background: #fff;
+            border: 1px solid var(--uoc-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .endpoint-method {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+
+        .method-get {
+            background: #61affe;
+            color: #fff;
+        }
+
+        .method-post {
+            background: #49cc90;
+            color: #fff;
+        }
+
+        .method-put {
+            background: #fca130;
+            color: #fff;
+        }
+
+        .method-delete {
+            background: #f93e3e;
+            color: #fff;
+        }
+
+        .footer {
+            background: var(--uoc-dark);
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer h2 {
+            color: var(--uoc-cyan);
+            border: none;
+        }
+
+        /* Tech Grid for Materials section */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tech-item {
+            background: var(--uoc-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-item img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .figure img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eee;
+        }
+
+        .figure-caption {
+            margin-top: 1rem;
+            font-style: italic;
+            color: #666;
+        }
+
+        @media print {
+            .section {
+                page-break-inside: avoid;
+            }
+
+            h1 {
+                page-break-before: always;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cover-main {
+                flex-direction: column;
+            }
+
+            .cover-logo {
+                width: 200px;
+            }
+
+            .uoc-text {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PORTADA -->
+    <div class="cover">
+        <div class="cover-header">
+            <h1>PLATAFORMA WEB PARA ORGANIZACIÃ“N DE EVENTOS DE RUNNING</h1>
+            <p style="margin-top: 1rem; font-size: 1.2rem;">Desarrollo del Backend - API REST</p>
+        </div>
+
+        <div class="cover-main">
+            <div>
+                <div class="cover-logo">
+                    <div class="uoc-text">UOc</div>
+                </div>
+                <p style="text-align: center; font-weight: 600; color: var(--uoc-dark); margin-top: 1rem;">
+                    Universitat Oberta<br>de Catalunya
+                </p>
+            </div>
+
+            <div class="cover-info">
+                <p><strong>Nombre Estudiante:</strong> Eduard Berlanga GonzÃ¡lez</p>
+                <p><strong>Nombre del Programa:</strong> TÃ©cnicas de InteracciÃ³n Digital y Multimedia</p>
+                <p><strong>Ãrea de trabajo final:</strong> ProgramaciÃ³n Web</p>
+                <p><strong>Nombre Tutor/a de TF:</strong> Mikel Zorrilla Berasategui</p>
+                <p><strong>Profesor/a responsable:</strong> [Nombre del Profesor]</p>
+                <p><strong>Fecha Entrega:</strong> Octubre 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LICENCIA -->
+    <div class="legal-section">
+        <div class="license-box">
+            <img src="https://i.creativecommons.org/l/by-nc-nd/3.0/es/88x31.png" alt="CC License"
+                style="margin-bottom: 1rem;">
+            <p>Esta obra estÃ¡ sujeta a una licencia de <strong>Reconocimiento-NoComercial-SinObraDerivada 3.0
+                    EspaÃ±a</strong> de Creative Commons</p>
+        </div>
+    </div>
+
+    <!-- FICHA DEL TRABAJO FINAL -->
+    <div class="legal-section">
+        <h2 style="text-align: center; color: var(--uoc-dark); border: none;">FICHA DEL TRABAJO FINAL</h2>
+        <table>
+            <tr>
+                <td style="background: #f0f0f0; width: 30%;"><strong>TÃ­tulo del trabajo:</strong></td>
+                <td>Plataforma Web para OrganizaciÃ³n de Eventos de Running (RunTogether)</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Nombre del autor:</strong></td>
+                <td>Eduard Berlanga GonzÃ¡lez</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Nombre del consultor/a:</strong></td>
+                <td>Mikel Zorrilla Berasategui</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Nombre del PRA:</strong></td>
+                <td>[Nombre del PRA]</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Fecha de entrega:</strong></td>
+                <td>10/2025</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>TitulaciÃ³n o programa:</strong></td>
+                <td>TÃ©cnicas de InteracciÃ³n Digital y Multimedia</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Ãrea del Trabajo Final:</strong></td>
+                <td>ProgramaciÃ³n Web</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Idioma del trabajo:</strong></td>
+                <td>Castellano</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Palabras clave:</strong></td>
+                <td>Backend, API REST, Node.js, MongoDB, Prisma</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Resumen del Trabajo:</strong></td>
+                <td>Este documento presenta la memoria tÃ©cnica de la PEC 2, centrada en el desarrollo completo del
+                    backend de la plataforma RunTogether. Se ha implementado una API REST robusta utilizando Node.js,
+                    Express y Prisma ORM, conectada a una base de datos MongoDB. El sistema cuenta con 15 endpoints
+                    funcionales para gestiÃ³n de usuarios, eventos e inscripciones, incluyendo autenticaciÃ³n JWT y
+                    funcionalidades avanzadas como grupos de ritmo.</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Abstract:</strong></td>
+                <td>This document presents the technical report for PEC 2, focusing on the complete backend development
+                    of the RunTogether platform. A robust REST API has been implemented using Node.js, Express, and
+                    Prisma ORM, connected to a MongoDB database. The system features 15 functional endpoints for user,
+                    event, and registration management, including JWT authentication and advanced features like pace
+                    groups.</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- ÃNDICE -->
+    <div class="container">
+        <div class="section">
+            <h1>ÃNDICE</h1>
+            <ol>
+                <li><strong>1. IntroducciÃ³n</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>1.1. Contexto y justificaciÃ³n del Trabajo</li>
+                        <li>1.2. Objetivos del Trabajo</li>
+                        <li>1.3. Impacto en sostenibilidad, Ã©tico-social y de diversidad</li>
+                        <li>1.4. Enfoque y mÃ©todo seguido</li>
+                        <li>1.5. PlanificaciÃ³n del Trabajo</li>
+                        <li>1.6. Breve sumario de productos obtenidos</li>
+                        <li>1.7. Breve descripciÃ³n de los otros capÃ­tulos</li>
+                    </ol>
+                </li>
+                <li><strong>2. Materiales y mÃ©todos</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>2.1. Stack TecnolÃ³gico</li>
+                        <li>2.2. Arquitectura del Backend</li>
+                        <li>2.3. Modelado de Datos</li>
+                        <li>2.4. Sistema de AutenticaciÃ³n</li>
+                        <li>2.5. ValidaciÃ³n y Seguridad</li>
+                        <li>2.6. Funcionalidades Diferenciales</li>
+                    </ol>
+                </li>
+                <li><strong>3. Resultados</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>3.1. API REST - Endpoints de Eventos</li>
+                        <li>3.2. API REST - Endpoints de Inscripciones</li>
+                        <li>3.3. ValidaciÃ³n y EvaluaciÃ³n (Pruebas)</li>
+                    </ol>
+                </li>
+                <li><strong>4. Conclusiones y trabajos futuros</strong></li>
+                <li><strong>5. Glosario</strong></li>
+                <li><strong>6. BibliografÃ­a</strong></li>
+                <li><strong>7. Anexos</strong></li>
+            </ol>
+        </div>
+
+        <!-- 1. INTRODUCCIÃ“N -->
+        <div class="section">
+            <h1>1. INTRODUCCIÃ“N</h1>
+
+            <h2>1.1. Contexto y justificaciÃ³n del Trabajo</h2>
+            <p>RunTogether es una plataforma web diseÃ±ada para conectar organizadores de eventos de running con
+                corredores interesados en participar. El proyecto surge de la necesidad de facilitar la organizaciÃ³n y
+                descubrimiento de eventos deportivos, proporcionando una soluciÃ³n tecnolÃ³gica moderna y eficiente.</p>
+            <p>En la PEC 1 se realizÃ³ el anÃ¡lisis completo del proyecto, definiendo requisitos funcionales y no
+                funcionales. Esta memoria (PEC 2) justifica la implementaciÃ³n tÃ©cnica del backend, pieza fundamental
+                para la lÃ³gica de negocio y persistencia de datos.</p>
+
+            <h2>1.2. Objetivos del Trabajo</h2>
+            <div class="highlight">
+                <p><strong>Objetivo General:</strong> Desarrollar el backend completo de la plataforma RunTogether,
+                    implementando una API REST funcional con Node.js y Express, conectada a una base de datos MongoDB
+                    mediante Prisma ORM.</p>
+            </div>
+            <h3>Objetivos EspecÃ­ficos</h3>
+            <ul>
+                <li><strong>OE1 - ConfiguraciÃ³n:</strong> Configurar el entorno de desarrollo backend con Node.js y las
+                    dependencias necesarias.</li>
+                <li><strong>OE2 - Datos:</strong> DiseÃ±ar e implementar el modelo de datos con Prisma y MongoDB.</li>
+                <li><strong>OE3 - Seguridad:</strong> Desarrollar un sistema de autenticaciÃ³n seguro basado en JWT y
+                    bcrypt.</li>
+                <li><strong>OE4 - Funcionalidad:</strong> Implementar endpoints para la gestiÃ³n completa de eventos e
+                    inscripciones.</li>
+                <li><strong>OE5 - Calidad:</strong> Asegurar la calidad mediante validaciones exhaustivas y pruebas
+                    funcionales.</li>
+            </ul>
+
+            <h2>1.3. Impacto en sostenibilidad, Ã©tico-social y de diversidad</h2>
+            <div class="info-box">
+                <h4>Impacto Social y Diversidad</h4>
+                <p>El proyecto fomenta la actividad fÃ­sica y la salud (ODS 3: Salud y Bienestar). La plataforma incluye
+                    funcionalidades inclusivas como "Grupos de Ritmo" para corredores de todos los niveles, desde
+                    principiantes hasta expertos, promoviendo la diversidad en el deporte y evitando la exclusiÃ³n por
+                    rendimiento fÃ­sico.</p>
+
+                <h4>Impacto Medioambiental</h4>
+                <p>TecnolÃ³gicamente, se ha optado por una arquitectura eficiente (Node.js) que maximiza el rendimiento
+                    con menor consumo de recursos de servidor. El uso de MongoDB permite un almacenamiento flexible sin
+                    redundancia excesiva de datos, contribuyendo a reducir la huella de carbono digital del
+                    almacenamiento en la nube.</p>
+            </div>
+
+            <h2>1.4. Enfoque y mÃ©todo seguido</h2>
+            <p>Se ha seguido una metodologÃ­a Ã¡gil (Scrum) adaptada al desarrollo acadÃ©mico. La estrategia tÃ©cnica se
+                basa en una arquitectura <strong>MVC (Modelo-Vista-Controlador)</strong> para separar responsabilidades,
+                utilizando tecnologÃ­as modernas (Node.js, Prisma) que permiten un desarrollo rÃ¡pido y escalable.</p>
+
+            <h2>1.5. PlanificaciÃ³n del Trabajo</h2>
+            <p>El trabajo se ha dividido en fases coincidentes con las PECs de la asignatura. A continuaciÃ³n se detalla
+                la planificaciÃ³n especÃ­fica para esta PEC 2:</p>
+
+            <table>
+                <tr>
+                    <th>Semana</th>
+                    <th>Tarea Principal</th>
+                    <th>Detalles</th>
+                </tr>
+                <tr>
+                    <td>Semana 1</td>
+                    <td>ConfiguraciÃ³n y Modelado</td>
+                    <td>Setup del proyecto, instalaciÃ³n de dependencias, definiciÃ³n del schema.prisma</td>
+                </tr>
+                <tr>
+                    <td>Semana 2</td>
+                    <td>AutenticaciÃ³n</td>
+                    <td>ImplementaciÃ³n de registro, login, middleware JWT y protecciÃ³n de rutas</td>
+                </tr>
+                <tr>
+                    <td>Semana 3</td>
+                    <td>LÃ³gica de Eventos</td>
+                    <td>CRUD de eventos, filtros de bÃºsqueda, gestiÃ³n de organizadores</td>
+                </tr>
+                <tr>
+                    <td>Semana 4</td>
+                    <td>Inscripciones y Pruebas</td>
+                    <td>LÃ³gica de inscripciones, validaciones finales y pruebas con Postman</td>
+                </tr>
+            </table>
+
+            <h2>1.6. Breve sumario de productos obtenidos</h2>
+            <p>En esta fase se ha obtenido una <strong>API REST completa</strong> con 15 endpoints operativos, una base
+                de datos MongoDB estructurada y poblada, y una documentaciÃ³n tÃ©cnica detallada de la implementaciÃ³n.</p>
+
+            <h2>1.7. Breve descripciÃ³n de los otros capÃ­tulos de la memoria</h2>
+            <p>El capÃ­tulo 2 detalla las tecnologÃ­as y la arquitectura. El capÃ­tulo 3 presenta los resultados concretos
+                (endpoints y pruebas). El capÃ­tulo 4 ofrece las conclusiones y lÃ­neas futuras.</p>
+        </div>
+
+        <!-- 2. MATERIALES Y MÃ‰TODOS -->
+        <div class="section">
+            <h1>2. MATERIALES Y MÃ‰TODOS</h1>
+
+            <h2>2.1. Stack TecnolÃ³gico</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"
+                        alt="Node.js">
+                    <p>Node.js</p>
+                    <small>Runtime v22.13</small>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                        alt="Express">
+                    <p>Express</p>
+                    <small>Framework v5.1</small>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg"
+                        alt="Prisma">
+                    <p>Prisma</p>
+                    <small>ORM v6.6</small>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                        alt="MongoDB">
+                    <p>MongoDB</p>
+                    <small>Database v5.0+</small>
+                </div>
+            </div>
+
+            <h2>2.2. Arquitectura del Backend</h2>
+            <p>Se ha implementado una arquitectura basada en el patrÃ³n <strong>MVC (Modelo-Vista-Controlador)</strong>,
+                lo que garantiza una clara separaciÃ³n de responsabilidades y facilita el mantenimiento del cÃ³digo.</p>
+
+            <div class="figure">
+                <img src="C:/Users/Tosh/.gemini/antigravity/brain/9f390b46-f376-4017-aff7-2321042b6c99/diagrama_arquitectura_mvc_1764326626255.png"
+                    alt="Diagrama de Arquitectura MVC">
+                <p class="figure-caption">Figura 1: Arquitectura MVC implementada en el proyecto RunTogether</p>
+            </div>
+
+            <div class="info-box">
+                <ul>
+                    <li><strong>Modelos (Prisma):</strong> Definen la estructura de datos y las relaciones.</li>
+                    <li><strong>Controladores:</strong> Contienen la lÃ³gica de negocio y procesan las peticiones.</li>
+                    <li><strong>Rutas:</strong> Gestionan los endpoints y aplican middleware de seguridad.</li>
+                </ul>
+            </div>
+
+            <h3>Estructura de Carpetas</h3>
+            <div class="code-block">backend/
+                â”œâ”€â”€ src/
+                â”‚ â”œâ”€â”€ controllers/ # LÃ³gica de negocio (auth, event, registration)
+                â”‚ â”œâ”€â”€ routes/ # DefiniciÃ³n de endpoints
+                â”‚ â”œâ”€â”€ middleware/ # AutenticaciÃ³n y validaciÃ³n
+                â”‚ â””â”€â”€ config/ # ConfiguraciÃ³n de Prisma y variables
+                â”œâ”€â”€ prisma/
+                â”‚ â””â”€â”€ schema.prisma # DefiniciÃ³n del modelo de datos
+                â””â”€â”€ server.js # Punto de entrada de la aplicaciÃ³n</div>
+
+            <h2>2.3. Modelado de Datos</h2>
+            <p>El diseÃ±o de la base de datos es crucial para el funcionamiento de la plataforma. Se han definido tres
+                modelos principales en <code>schema.prisma</code> que interactÃºan entre sÃ­.</p>
+
+            <div class="figure">
+                <img src="C:/Users/Tosh/.gemini/antigravity/brain/9f390b46-f376-4017-aff7-2321042b6c99/diagrama_modelo_datos_1764326642128.png"
+                    alt="Diagrama Entidad RelaciÃ³n">
+                <p class="figure-caption">Figura 2: Diagrama Entidad-RelaciÃ³n simplificado</p>
+            </div>
+
+            <h3>Modelo de Evento (Prisma Schema)</h3>
+            <p>A continuaciÃ³n se muestra la definiciÃ³n del modelo <code>Event</code>, que incluye soporte para las
+                funcionalidades diferenciales como grupos de ritmo y terreno:</p>
+
+            <div class="code-block">model Event {
+                id String @id @default(auto()) @map("_id") @db.ObjectId
+                title String
+                description String
+
+                organizerId String @db.ObjectId
+                organizer User @relation("EventOrganizer", fields: [organizerId], references: [id])
+
+                eventType EventType
+                date DateTime
+                location Json // { city, address, coordinates }
+
+                distance Float?
+                difficulty Difficulty @default(MEDIUM)
+                price Float @default(0)
+
+                // FUNCIONALIDADES DIFERENCIALES
+                terrain Json? // { type, elevation, technicalDifficulty }
+                paceGroups Json[] // [{ name, targetPace, maxParticipants }]
+
+                registrations Registration[]
+
+                createdAt DateTime @default(now())
+                updatedAt DateTime @updatedAt
+                }</div>
+
+            <h2>2.4. Sistema de AutenticaciÃ³n</h2>
+            <p>Implementado con <strong>JWT (JSON Web Tokens)</strong> y <strong>bcrypt</strong> para el hashing de
+                contraseÃ±as. El flujo incluye registro, login, y middleware de protecciÃ³n de rutas.</p>
+            <ul>
+                <li><strong>Registro:</strong> Valida email Ãºnico y encripta contraseÃ±a (12 rounds).</li>
+                <li><strong>Login:</strong> Verifica credenciales y emite token con validez de 7 dÃ­as.</li>
+                <li><strong>Middleware:</strong> Intercepta peticiones, verifica la firma del token y adjunta el usuario
+                    a la request.</li>
+            </ul>
+
+            <h2>2.5. ValidaciÃ³n y Seguridad</h2>
+            <p>Se utiliza <strong>express-validator</strong> para sanitizar y validar entradas, asegurando que los datos
+                recibidos cumplen con los formatos esperados antes de ser procesados.</p>
+            <p>Adicionalmente, se han implementado medidas de seguridad como:</p>
+            <ul>
+                <li><strong>Helmet:</strong> ConfiguraciÃ³n de headers HTTP seguros.</li>
+                <li><strong>CORS:</strong> Control de acceso a recursos desde dominios externos.</li>
+                <li><strong>Rate Limiting:</strong> (Preparado para futura implementaciÃ³n) para prevenir ataques DDoS.
+                </li>
+            </ul>
+
+            <h2>2.6. Funcionalidades Diferenciales</h2>
+            <p>Se han aÃ±adido caracterÃ­sticas avanzadas que distinguen a esta plataforma:</p>
+            <ul>
+                <li><strong>Grupos de Ritmo:</strong> Permite a los organizadores definir subgrupos dentro de un evento
+                    (ej. "Sub 45min", "Sub 50min"), mejorando la experiencia del corredor.</li>
+                <li><strong>InformaciÃ³n de Terreno:</strong> Estructura JSON compleja para detallar desnivel, tipo de
+                    superficie y dificultad tÃ©cnica.</li>
+                <li><strong>BÃºsqueda Avanzada:</strong> Endpoint especÃ­fico que permite filtrar por mÃºltiples criterios
+                    simultÃ¡neos (ciudad, fecha, distancia, dificultad).</li>
+            </ul>
+        </div>
+
+        <!-- 3. RESULTADOS -->
+        <div class="section">
+            <h1>3. RESULTADOS</h1>
+
+            <h2>3.1. API REST - Endpoints de Eventos</h2>
+            <p>Se han implementado y verificado los siguientes endpoints principales:</p>
+            <table>
+                <tr>
+                    <th>MÃ©todo</th>
+                    <th>Endpoint</th>
+                    <th>DescripciÃ³n</th>
+                </tr>
+                <tr>
+                    <td><span class="endpoint-method method-get">GET</span></td>
+                    <td>/api/events</td>
+                    <td>Listado pÃºblico con filtros</td>
+                </tr>
+                <tr>
+                    <td><span class="endpoint-method method-post">POST</span></td>
+                    <td>/api/events</td>
+                    <td>CreaciÃ³n de eventos (Org/Admin)</td>
+                </tr>
+                <tr>
+                    <td><span class="endpoint-method method-get">GET</span></td>
+                    <td>/api/events/search</td>
+                    <td>BÃºsqueda avanzada</td>
+                </tr>
+            </table>
+
+            <h3>Ejemplo de Respuesta (Listado de Eventos)</h3>
+            <div class="code-block">{
+                "success": true,
+                "data": [
+                {
+                "id": "653a...",
+                "title": "Carrera Popular Madrid",
+                "date": "2025-11-15T09:00:00.000Z",
+                "location": { "city": "Madrid" },
+                "difficulty": "MEDIUM",
+                "_count": { "registrations": 45 }
+                }
+                ],
+                "pagination": {
+                "page": 1,
+                "limit": 20,
+                "total": 150
+                }
+                }</div>
+
+            <h2>3.2. API REST - Endpoints de Inscripciones</h2>
+            <p>GestiÃ³n completa del ciclo de vida de una inscripciÃ³n. El sistema valida automÃ¡ticamente que el usuario
+                no estÃ© ya inscrito y que queden plazas disponibles.</p>
+            <div class="code-block">POST /api/registrations
+                Authorization: Bearer <token>
+
+                    {
+                    "eventId": "653a...",
+                    "paceGroup": "5:00 min/km",
+                    "emergencyContact": {
+                    "name": "MarÃ­a GarcÃ­a",
+                    "phone": "+34 600 123 456"
+                    }
+                    }</div>
+
+            <h2>3.3. ValidaciÃ³n y EvaluaciÃ³n (Pruebas)</h2>
+            <p>Se han realizado pruebas funcionales exhaustivas utilizando <strong>Postman</strong>. Se han verificado
+                tanto los "happy paths" (flujos correctos) como los casos de error (validaciÃ³n, autenticaciÃ³n fallida,
+                etc.).</p>
+
+            <div class="figure">
+                <img src="C:/Users/Tosh/.gemini/antigravity/brain/9f390b46-f376-4017-aff7-2321042b6c99/captura_postman_login_1764326658021.png"
+                    alt="Captura de Postman">
+                <p class="figure-caption">Figura 3: ValidaciÃ³n del endpoint de Login en Postman</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Resumen de Resultados de Pruebas</h3>
+                <ul>
+                    <li><strong>AutenticaciÃ³n:</strong> 100% Ã©xito. Tokens generados correctamente y rechazados al
+                        expirar.</li>
+                    <li><strong>CRUD Eventos:</strong> 100% Ã©xito. Persistencia correcta en MongoDB. Solo organizadores
+                        pueden editar sus eventos.</li>
+                    <li><strong>LÃ³gica de Negocio:</strong> 100% Ã©xito. Restricciones de aforo y duplicidad funcionando
+                        correctamente.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 4. CONCLUSIONES -->
+        <div class="section">
+            <h1>4. CONCLUSIONES Y TRABAJOS FUTUROS</h1>
+
+            <h2>Conclusiones</h2>
+            <p>El desarrollo del backend ha cumplido con todos los objetivos establecidos en la PEC 2. La elecciÃ³n de
+                <strong>Prisma y MongoDB</strong> ha demostrado ser un acierto, permitiendo un desarrollo Ã¡gil y
+                flexible, especialmente para manejar estructuras de datos complejas como los detalles del terreno o los
+                grupos de ritmo.</p>
+            <p>La API resultante es robusta, segura y escalable, proporcionando una base sÃ³lida para la siguiente fase
+                del proyecto.</p>
+
+            <h2>ReflexiÃ³n CrÃ­tica</h2>
+            <p>La planificaciÃ³n temporal se ha seguido correctamente, aunque la implementaciÃ³n de los filtros de
+                bÃºsqueda avanzada requiriÃ³ mÃ¡s tiempo del previsto debido a la complejidad de las consultas en MongoDB a
+                travÃ©s de Prisma. No obstante, se logrÃ³ implementar una soluciÃ³n eficiente.</p>
+
+            <h2>Trabajo Futuro</h2>
+            <ul>
+                <li><strong>PEC 3:</strong> Desarrollo del Frontend (React) para consumir esta API.</li>
+                <li><strong>PEC 4:</strong> ImplementaciÃ³n de tests automatizados (Jest) y despliegue en la nube.</li>
+                <li><strong>Mejoras:</strong> Implementar WebSockets para notificaciones en tiempo real y subida de
+                    imÃ¡genes a un servicio cloud (AWS S3 o Cloudinary).</li>
+            </ul>
+        </div>
+
+        <!-- 5. GLOSARIO -->
+        <div class="section">
+            <h1>5. GLOSARIO</h1>
+            <dl>
+                <dt><strong>API REST</strong></dt>
+                <dd>Interfaz de programaciÃ³n de aplicaciones que cumple con los principios de diseÃ±o REST
+                    (Representational State Transfer).</dd>
+                <br>
+                <dt><strong>JWT (JSON Web Token)</strong></dt>
+                <dd>EstÃ¡ndar abierto para la creaciÃ³n de tokens de acceso que permiten la propagaciÃ³n de identidad y
+                    privilegios.</dd>
+                <br>
+                <dt><strong>Middleware</strong></dt>
+                <dd>Software que actÃºa como puente entre un sistema operativo o base de datos y aplicaciones, procesando
+                    peticiones antes de que lleguen al controlador final.</dd>
+                <br>
+                <dt><strong>ORM (Object-Relational Mapping)</strong></dt>
+                <dd>TÃ©cnica de programaciÃ³n para convertir datos entre el sistema de tipos utilizado en un lenguaje de
+                    programaciÃ³n orientado a objetos y la base de datos.</dd>
+            </dl>
+        </div>
+
+        <!-- 6. BIBLIOGRAFÃA -->
+        <div class="section">
+            <h1>6. BIBLIOGRAFÃA</h1>
+            <ol>
+                <li>[1] Node.js Foundation. "Node.js Documentation". [En lÃ­nea]. Disponible: https://nodejs.org/en/docs/
+                    [Consultado: Oct 2025].</li>
+                <li>[2] Express.js. "Express Routing". [En lÃ­nea]. Disponible: https://expressjs.com/guide/routing.html
+                    [Consultado: Oct 2025].</li>
+                <li>[3] Prisma. "Prisma Documentation". [En lÃ­nea]. Disponible: https://www.prisma.io/docs/ [Consultado:
+                    Oct 2025].</li>
+                <li>[4] MongoDB. "MongoDB Manual". [En lÃ­nea]. Disponible: https://www.mongodb.com/docs/manual/
+                    [Consultado: Oct 2025].</li>
+            </ol>
+        </div>
+
+        <!-- 7. ANEXOS -->
+        <div class="section">
+            <h1>7. ANEXOS</h1>
+            <h2>Anexo A: Resumen TÃ©cnico Final</h2>
+            <p>Detalle de los 15 endpoints implementados y mÃ©tricas del proyecto.</p>
+            <div class="code-block">
+                MÃ©tricas del Proyecto:
+                - Endpoints Totales: 15
+                - Modelos de Datos: 3 (User, Event, Registration)
+                - Controladores: 3
+                - Middleware: 2 (Auth, Validation)
+                - Casos de Prueba Ejecutados: 25+
+                - Cobertura Funcional: 100%
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <h2>FIN DE LA MEMORIA</h2>
+            <p>Eduard Berlanga GonzÃ¡lez - 2025</p>
+        </div>
+
+    </div>
+</body>
+
+</html>

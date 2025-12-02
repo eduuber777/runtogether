@@ -7,6 +7,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth.routes');
 const eventRoutes = require('./routes/events.routes');
 const inscriptionRoutes = require('./routes/inscriptions.routes');
+const seedRoutes = require('./routes/seed.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ app.use(morgan('dev'));
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/inscriptions', inscriptionRoutes);
+app.use('/api/seed', seedRoutes);
 
 // Health Check
 app.get('/', (req, res) => {
