@@ -20,6 +20,13 @@ model User {
   updatedAt DateTime @updatedAt
 
   inscriptions Inscription[]
+  comments     Comment[]
+  posts        Post[]
+  notifications Notification[]
+
+  level        String?  // "BEGINNER", "INTERMEDIATE", "ADVANCED"
+  photoUrl     String?
+  preferences  Json?
 }
 
 model Event {
@@ -31,10 +38,18 @@ model Event {
   distance    Float    // en km
   price       Float
   imageUrl    String?
+  
+  // Nuevos campos
+  difficulty      String? // "BEGINNER", "INTERMEDIATE", "ADVANCED"
+  maxParticipants Int?
+  elevation       Float?  // desnivel en metros
+  terrainType     String? // "TRAIL", "ASPHALT", "MIXED"
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   inscriptions Inscription[]
+  comments     Comment[]
 }
 
 model Inscription {
@@ -47,5 +62,41 @@ model Inscription {
   user  User  @relation(fields: [userId], references: [id])
   event Event @relation(fields: [eventId], references: [id])
 
-  @@unique([userId, eventId]) // Un usuario solo puede inscribirse una vez al mismo evento
+  @@unique([userId, eventId])
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  createdAt DateTime @default(now())
+  userId    String   @db.ObjectId
+  eventId   String?  @db.ObjectId
+  postId    String?  @db.ObjectId
+
+  user  User   @relation(fields: [userId], references: [id])
+  event Event? @relation(fields: [eventId], references: [id])
+  post  Post?  @relation(fields: [postId], references: [id])
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  userId    String   @db.ObjectId
+  likes     Int      @default(0)
+
+  user     User      @relation(fields: [userId], references: [id])
+  comments Comment[]
+}
+
+model Notification {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  type      String   // "SYSTEM", "EVENT", "SOCIAL"
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
 }

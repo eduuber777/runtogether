@@ -10,11 +10,24 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import EventDetail from './pages/EventDetail';
 import Dashboard from './pages/Dashboard';
+import Profile from './pages/Profile';
+import ForgotPassword from './pages/ForgotPassword';
+import AdminDashboard from './pages/AdminDashboard';
+import Community from './pages/Community';
+import Notifications from './pages/Notifications';
+import PublicProfile from './pages/PublicProfile';
 
 const ProtectedRoute = ({ children }) => {
     const { user, loading } = useAuth();
     if (loading) return <div>Cargando...</div>;
     if (!user) return <Navigate to="/login" />;
+    return children;
+};
+
+const AdminRoute = ({ children }) => {
+    const { user, loading } = useAuth();
+    if (loading) return <div>Cargando...</div>;
+    if (!user || user.role !== 'ADMIN') return <Navigate to="/" />;
     return children;
 };
 
@@ -28,7 +41,17 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/forgot-password" element={<ForgotPassword />} />
                         <Route path="/event/:id" element={<EventDetail />} />
+                        <Route path="/community" element={<Community />} />
+                        <Route
+                            path="/notifications"
+                            element={
+                                <ProtectedRoute>
+                                    <Notifications />
+                                </ProtectedRoute>
+                            }
+                        />
                         <Route
                             path="/dashboard"
                             element={
@@ -37,6 +60,9 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
+                        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                        <Route path="/profile/:id" element={<PublicProfile />} />
+                        <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
                         <Route path="*" element={<Navigate to="/" />} />
                     </Routes>
                 </main>

@@ -76,7 +76,7 @@ const getMe = async (req, res) => {
     try {
         const user = await prisma.user.findUnique({
             where: { id: req.user.id },
-            select: { id: true, name: true, email: true, role: true }
+            select: { id: true, name: true, email: true, role: true, level: true, photoUrl: true }
         });
         res.json(user);
     } catch (error) {
@@ -84,4 +84,78 @@ const getMe = async (req, res) => {
     }
 };
 
-module.exports = { register, login, getMe };
+// Forgot password - send reset link (simplified version)
+const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) {
+            // Don't reveal if user exists for security
+            return res.json({ message: 'If the email exists, a reset link has been sent' });
+        }
+
+        // In a real app, you would:
+        // 1. Generate a reset token
+        // 2. Store it in database with expiration
+        // 3. Send email with reset link
+
+        // For now, just simulate success
+        console.log(`Password reset requested for: ${email}`);
+
+        res.json({ message: 'If the email exists, a reset link has been sent' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error processing request', error: error.message });
+    }
+};
+
+// Reset password with token (simplified version)
+const resetPassword = async (req, res) => {
+    try {
+        const { token, newPassword } = req.body;
+
+        // In a real app, you would:
+        // 1. Verify the token
+        // 2. Check if it's expired
+        // 3. Update the password
+
+        res.json({ message: 'Password reset functionality coming soon' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error resetting password', error: error.message });
+    }
+};
+
+// Change password (for logged-in users)
+const changePassword = async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        const userId = req.user.id;
+
+        // Get user
+        const user = await prisma.user.findUnique({ where: { id: userId } });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Verify current password
+        const validPassword = await bcrypt.compare(currentPassword, user.password);
+        if (!validPassword) {
+            return res.status(400).json({ message: 'Current password is incorrect' });
+        }
+
+        // Hash new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Update password
+        await prisma.user.update({
+            where: { id: userId },
+            data: { password: hashedPassword }
+        });
+
+        res.json({ message: 'Password changed successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error changing password', error: error.message });
+    }
+};
+
+module.exports = { register, login, getMe, forgotPassword, resetPassword, changePassword };

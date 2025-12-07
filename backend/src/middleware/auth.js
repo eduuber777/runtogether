@@ -24,4 +24,7 @@ const authorizeAdmin = (req, res, next) => {
     next();
 };
 
-module.exports = { authenticateToken, authorizeAdmin };
+// Alias for consistency
+const isAdmin = authorizeAdmin;
+
+module.exports = { authenticateToken, authorizeAdmin, isAdmin };

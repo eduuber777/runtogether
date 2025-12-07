@@ -7,7 +7,11 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth.routes');
 const eventRoutes = require('./routes/events.routes');
 const inscriptionRoutes = require('./routes/inscriptions.routes');
-const seedRoutes = require('./routes/seed.routes');
+const userRoutes = require('./routes/users.routes');
+const adminRoutes = require('./routes/admin.routes');
+const commentsRoutes = require('./routes/comments.routes');
+const postsRoutes = require('./routes/posts.routes');
+const notificationsRoutes = require('./routes/notifications.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,7 +26,11 @@ app.use(morgan('dev'));
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/inscriptions', inscriptionRoutes);
-app.use('/api/seed', seedRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/comments', commentsRoutes);
+app.use('/api/posts', postsRoutes);
+app.use('/api/notifications', notificationsRoutes);
 
 // Health Check
 app.get('/', (req, res) => {

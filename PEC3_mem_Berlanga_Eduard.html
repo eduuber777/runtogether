@@ -434,6 +434,7 @@
                                     <li>2.4. Sistema de Rutas y Navegación</li>
                                     <li>2.5. Gestión de Estado y Consumo de la API</li>
                                     <li>2.6. Funcionalidades Diferenciales de la Interfaz</li>
+                                    <li>2.7. Funcionalidades Detalladas de la Plataforma</li>
                                 </ol>
                             </li>
                             <li><strong>3. Resultados</strong>
@@ -560,201 +561,190 @@
                             diseño es totalmente
                             <strong>responsive</strong> gracias a las clases de utilidad de Tailwind CSS.
                         </p>
-                    </div>
 
-                    <!-- 3. RESULTADOS -->
-                    <div class="section">
-                        <h1>3. RESULTADOS</h1>
+                        <h2>2.7. Funcionalidades Detalladas de la Plataforma</h2>
+                        <p>A continuación se detallan las funcionalidades implementadas y planificadas para la
+                            plataforma RunTogether, clasificadas por módulos:</p>
 
-                        <h2>3.1. Pantalla de Listado y Filtros de Eventos</h2>
-                        <p>Se ha implementado una pantalla principal donde se muestran los eventos de running obtenidos
-                            desde la API. La interfaz permite aplicar filtros por ciudad, fecha, dificultad y otros
-                            criterios relevantes, actualizando el listado de forma dinámica.</p>
-                        <div class="code-block">
-                            Ejemplo de estructura de datos consumida por el frontend:
-                            {
-                            "id": "653a...",
-                            "title": "Carrera Popular Madrid",
-                            "date": "2025-11-15T09:00:00.000Z",
-                            "location": { "city": "Madrid" },
-                            "difficulty": "MEDIUM",
-                            "_count": { "registrations": 45 }
-                            }
-                        </div>
-
-                        <h2>3.2. Flujo de Inscripción y Gestión de Usuario</h2>
-                        <p>El frontend guía al usuario a través de un flujo de autenticación (login / registro) y de
-                            inscripción a eventos. La aplicación muestra mensajes claros de éxito o error y valida los
-                            campos del formulario antes de enviar los datos al backend.</p>
-                        <div class="code-block">
-                            Ejemplo de payload enviado desde el frontend al inscribirse:
-                            {
-                            "eventId": "653a...",
-                            "paceGroup": "5:00 min/km",
-                            "emergencyContact": {
-                            "name": "María García",
-                            "phone": "+34 600 123 456"
-                            }
-                            }
-                        </div>
-
-                        <h2>3.3. Validación, Usabilidad y Pruebas de Interfaz</h2>
-                        <p>Se han realizado pruebas manuales completas de la interfaz, verificando los flujos
-                            principales: navegación entre pantallas, aplicación de filtros, autenticación, inscripción y
-                            mensajes de error. Además, se ha revisado el comportamiento en diferentes tamaños de
-                            pantalla para garantizar una experiencia responsiva.</p>
-
-                        <div class="info-box">
-                            <h3>Resumen de Resultados de la Interfaz</h3>
-                            <ul>
-                                <li><strong>Navegación:</strong> Menú y rutas internas funcionando correctamente.</li>
-                                <li><strong>Flujo de eventos:</strong> Listado, detalle e inscripción integrados con la
-                                    API.</li>
-                                <li><strong>Experiencia de usuario:</strong> Formularios validados y mensajes de
-                                    feedback claros.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- 4. CONCLUSIONES -->
-                    <div class="section">
-                        <h1>4. CONCLUSIONES Y TRABAJOS FUTUROS</h1>
-
-                        </li>
-                        <li><strong>2. Materiales y métodos</strong>
-                            <ol style="list-style-type: none; margin-left: 1rem;">
-                                <li>2.1. Stack Tecnológico</li>
-                                <li>2.2. Arquitectura del Frontend</li>
-                                <li>2.3. Estructura de Componentes</li>
-                                <li>2.4. Sistema de Rutas y Navegación</li>
-                                <li>2.5. Gestión de Estado y Consumo de la API</li>
-                                <li>2.6. Funcionalidades Diferenciales de la Interfaz</li>
-                            </ol>
-                        </li>
-                        <li><strong>3. Resultados</strong>
-                            <ol style="list-style-type: none; margin-left: 1rem;">
-                                <li>3.1. Pantalla de Listado y Filtros de Eventos</li>
-                                <li>3.2. Flujo de Inscripción y Gestión de Usuario</li>
-                                <li>3.3. Validación, Usabilidad y Pruebas de Interfaz</li>
-                            </ol>
-                        </li>
-                        <li><strong>4. Conclusiones y trabajos futuros</strong></li>
-                        <li><strong>5. Glosario</strong></li>
-                        <li><strong>6. Bibliografía</strong></li>
-                        <li><strong>7. Anexos</strong></li>
-                        </ol>
-                    </div>
-
-                    <!-- 1. INTRODUCCIÓN -->
-                    <div class="section">
-                        <h1>1. INTRODUCCIÓN</h1>
-
-                        <h2>1.1. Contexto y justificación del Trabajo</h2>
-                        <p>RunTogether es una plataforma web diseñada para conectar organizadores de eventos de running
-                            con corredores de distintos niveles. En esta PEC 3 el foco se sitúa en el
-                            <strong>desarrollo del frontend en React</strong>, construyendo una interfaz moderna,
-                            accesible y fácil de usar que consuma la API desarrollada en la PEC 2.
-                        </p>
-
-                        <h2>1.2. Objetivos del Trabajo</h2>
-                        <p>El objetivo principal es implementar una interfaz web que permita a los usuarios:</p>
+                        <h3>1. Funcionalidades de Autenticación y Usuario</h3>
                         <ul>
-                            <li>Consultar y filtrar eventos de running de forma intuitiva.</li>
-                            <li>Registrarse e iniciar sesión en la plataforma.</li>
-                            <li>Inscribirse en eventos y revisar sus inscripciones.</li>
-                            <li>Disfrutar de una experiencia consistente en escritorio y móvil.</li>
+                            <li><strong>1.1. Registro de Usuario</strong>
+                                <ul>
+                                    <li>Formulario de registro con: email, contraseña, confirmación de contraseña.</li>
+                                    <li>Validación de formato de email y fortaleza de contraseña.</li>
+                                    <li>Verificación de email mediante enlace de confirmación.</li>
+                                    <li>Aceptación de términos y condiciones y política de privacidad.</li>
+                                </ul>
+                            </li>
+                            <li><strong>1.2. Inicio de Sesión</strong>
+                                <ul>
+                                    <li>Login con email y contraseña.</li>
+                                    <li>Opción "Recordarme" para sesiones persistentes.</li>
+                                    <li>Redirección segura post-autenticación.</li>
+                                </ul>
+                            </li>
+                            <li><strong>1.3. Gestión de Perfil de Usuario</strong>
+                                <ul>
+                                    <li>Edición de información personal: nombre, apellidos, foto de perfil.</li>
+                                    <li>Selección de nivel de corredor (principiante, intermedio, avanzado).</li>
+                                    <li>Configuración de preferencias y notificaciones.</li>
+                                    <li>Cambio de contraseña segura.</li>
+                                </ul>
+                            </li>
+                            <li><strong>1.4. Recuperación de Contraseña</strong>
+                                <ul>
+                                    <li>Solicitud de restablecimiento mediante email.</li>
+                                    <li>Generación de enlace temporal seguro.</li>
+                                    <li>Formulario para nueva contraseña.</li>
+                                </ul>
+                            </li>
                         </ul>
 
-                        <h2>1.3. Impacto y enfoque</h2>
-                        <p>El desarrollo del frontend se ha realizado priorizando la usabilidad, la accesibilidad y la
-                            separación clara entre presentación y lógica de negocio. Se emplean componentes
-                            reutilizables
-                            y un diseño coherente con la identidad visual definida para RunTogether.</p>
-                    </div>
-
-                    <!-- 2. MATERIALES Y MÉTODOS -->
-                    <div class="section">
-                        <h1>2. MATERIALES Y MÉTODOS</h1>
-
-                        <h2>2.1. Stack Tecnológico</h2>
-                        <div class="tech-grid">
-                            <div class="tech-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-                                    alt="React">
-                                <p>React 19</p>
-                                <small>Biblioteca UI</small>
-                            </div>
-                            <div class="tech-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
-                                    alt="Vite">
-                                <p>Vite</p>
-                                <small>Build Tool</small>
-                            </div>
-                            <div class="tech-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
-                                    alt="Tailwind">
-                                <p>Tailwind CSS</p>
-                                <small>Framework CSS</small>
-                            </div>
-                            <div class="tech-item">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/axios/axios-plain.svg"
-                                    alt="Axios">
-                                <p>Axios</p>
-                                <small>Cliente HTTP</small>
-                            </div>
-                        </div>
-
-                        <h2>2.2. Arquitectura del Frontend</h2>
-                        <p>La aplicación es una <strong>Single Page Application (SPA)</strong> construida con React. La
-                            arquitectura sigue
-                            una estructura modular basada en características (features) y componentes reutilizables.</p>
-
-                        <div class="info-box">
-                            <ul>
-                                <li><strong>Componentes:</strong> Bloques de UI reutilizables (Botones, Tarjetas,
-                                    Inputs).</li>
-                                <li><strong>Páginas:</strong> Vistas principales que componen la estructura de
-                                    navegación.</li>
-                                <li><strong>Contexto:</strong> Estado global para autenticación y preferencias de
-                                    usuario.</li>
-                                <li><strong>Servicios:</strong> Capa de abstracción para la comunicación con la API.
-                                </li>
-                            </ul>
-                        </div>
-
-                        <h2>2.3. Estructura de Componentes</h2>
-                        <div class="code-block">frontend/src/
-                            ├── components/ # UI reutilizable (Button, Card, Navbar)
-                            ├── pages/ # Vistas (Home, Login, EventDetails)
-                            ├── context/ # AuthContext, ThemeContext
-                            ├── services/ # Llamadas a API (authService, eventService)
-                            ├── hooks/ # Custom Hooks (useAuth, useFetch)
-                            ├── assets/ # Imágenes y estilos globales
-                            └── App.jsx # Configuración de Rutas</div>
-
-                        <h2>2.4. Sistema de Rutas y Navegación</h2>
-                        <p>Se utiliza <strong>React Router</strong> para gestionar la navegación sin recargar la página.
-                            Se han definido:</p>
+                        <h3>2. Funcionalidades de Gestión de Eventos</h3>
                         <ul>
-                            <li><strong>Rutas Públicas:</strong> Home, Login, Registro, Listado de Eventos.</li>
-                            <li><strong>Rutas Protegidas:</strong> Crear Evento, Mi Perfil, Mis Inscripciones (requieren
-                                Token JWT).</li>
+                            <li><strong>2.1. Creación de Eventos</strong>
+                                <ul>
+                                    <li>Formulario completo: título, descripción, fecha, hora, ubicación.</li>
+                                    <li>Selección de nivel de dificultad (principiante, intermedio, avanzado).</li>
+                                    <li>Configuración de límite de participantes.</li>
+                                    <li>Especificación de detalles técnicos: distancia, desnivel, tipo de terreno.</li>
+                                </ul>
+                            </li>
+                            <li><strong>2.2. Visualización de Eventos</strong>
+                                <ul>
+                                    <li>Lista de eventos disponibles con filtros por: fecha, nivel, ubicación.</li>
+                                    <li>Vista de calendario mensual/semanal.</li>
+                                    <li>Búsqueda por palabras clave y ubicación.</li>
+                                    <li>Vista detallada de cada evento con información completa.</li>
+                                </ul>
+                            </li>
+                            <li><strong>2.3. Inscripción a Eventos</strong>
+                                <ul>
+                                    <li>Botón de inscripción/desinscripción.</li>
+                                    <li>Validación de disponibilidad de plazas.</li>
+                                    <li>Confirmación de inscripción vía email/notificación.</li>
+                                    <li>Lista de participantes visible para usuarios inscritos.</li>
+                                </ul>
+                            </li>
+                            <li><strong>2.4. Gestión de Eventos (Admin)</strong>
+                                <ul>
+                                    <li>Panel de administración de eventos creados.</li>
+                                    <li>Edición de información de eventos.</li>
+                                    <li>Cancelación de eventos con notificación automática a inscritos.</li>
+                                    <li>Exportación de lista de participantes.</li>
+                                </ul>
+                            </li>
                         </ul>
 
-                        <h2>2.5. Gestión de Estado y Consumo de la API</h2>
-                        <p>La seguridad y el estado del usuario se gestionan mediante <strong>Context API</strong>. Al
-                            iniciar sesión, el token JWT
-                            recibido del backend se almacena en <code>localStorage</code> y se utiliza para configurar
-                            los headers de
-                            autorización en Axios.</p>
+                        <h3>3. Funcionalidades de Comunidad</h3>
+                        <ul>
+                            <li><strong>3.1. Muro Social</strong>
+                                <ul>
+                                    <li>Publicación de experiencias post-evento.</li>
+                                    <li>Subida de fotos relacionadas con eventos.</li>
+                                    <li>Sistema de comentarios en publicaciones.</li>
+                                    <li>Reacciones (me gusta) a publicaciones.</li>
+                                </ul>
+                            </li>
+                            <li><strong>3.2. Perfiles Públicos</strong>
+                                <ul>
+                                    <li>Visualización de perfil de otros usuarios.</li>
+                                    <li>Historial de eventos asistidos (público).</li>
+                                    <li>Estadísticas básicas de participación.</li>
+                                </ul>
+                            </li>
+                            <li><strong>3.3. Sistema de Comentarios en Eventos</strong>
+                                <ul>
+                                    <li>Comentarios públicos en páginas de eventos.</li>
+                                    <li>Moderación de comentarios por creadores de eventos.</li>
+                                    <li>Notificaciones de nuevos comentarios.</li>
+                                </ul>
+                            </li>
+                        </ul>
 
-                        <h2>2.6. Funcionalidades Diferenciales de la Interfaz</h2>
-                        <p>Se ha diseñado siguiendo los estándares <strong>WCAG 2.1 AA</strong>. Se utilizan etiquetas
-                            semánticas HTML5,
-                            atributos ARIA donde es necesario, y un esquema de colores con suficiente contraste. El
-                            diseño es totalmente
-                            <strong>responsive</strong> gracias a las clases de utilidad de Tailwind CSS.
-                        </p>
+                        <h3>4. Funcionalidades de Notificaciones</h3>
+                        <ul>
+                            <li><strong>4.1. Notificaciones del Sistema</strong>
+                                <ul>
+                                    <li>Recordatorios de eventos próximos (24h antes).</li>
+                                    <li>Confirmaciones de inscripción.</li>
+                                    <li>Notificaciones de comentarios y interacciones.</li>
+                                    <li>Alertas de cambios/cancelaciones de eventos.</li>
+                                </ul>
+                            </li>
+                            <li><strong>4.2. Preferencias de Notificación</strong>
+                                <ul>
+                                    <li>Configuración por tipo de notificación.</li>
+                                    <li>Selección de canales (email, notificación en app).</li>
+                                    <li>Gestión de frecuencia y horarios.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>5. Funcionalidades Administrativas</h3>
+                        <ul>
+                            <li><strong>5.1. Dashboard de Administración</strong>
+                                <ul>
+                                    <li>Vista general de estadísticas de plataforma.</li>
+                                    <li>Gestión de usuarios (activación/desactivación).</li>
+                                    <li>Moderación de contenido reportado.</li>
+                                    <li>Configuración global de la plataforma.</li>
+                                </ul>
+                            </li>
+                            <li><strong>5.2. Gestión de Usuarios</strong>
+                                <ul>
+                                    <li>Listado completo de usuarios registrados.</li>
+                                    <li>Herramientas de búsqueda y filtrado.</li>
+                                    <li>Capacidad de edición de perfiles (admin).</li>
+                                    <li>Sistema de reportes y moderación.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>6. Funcionalidades Técnicas</h3>
+                        <ul>
+                            <li><strong>6.1. Diseño Responsive</strong>
+                                <ul>
+                                    <li>Adaptación a dispositivos móviles, tablets y desktop.</li>
+                                    <li>Navegación táctil optimizada.</li>
+                                    <li>Rendimiento en conexiones móviles.</li>
+                                </ul>
+                            </li>
+                            <li><strong>6.2. Accesibilidad</strong>
+                                <ul>
+                                    <li>Cumplimiento WCAG 2.1 nivel AA.</li>
+                                    <li>Navegación por teclado completa.</li>
+                                    <li>Soporte para lectores de pantalla.</li>
+                                    <li>Contraste adecuado y tamaño de texto redimensionable.</li>
+                                </ul>
+                            </li>
+                            <li><strong>6.3. Performance y SEO</strong>
+                                <ul>
+                                    <li>Tiempos de carga optimizados.</li>
+                                    <li>Meta tags para redes sociales.</li>
+                                    <li>URLs amigables y estructura SEO-friendly.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>7. Funcionalidades de Seguridad</h3>
+                        <ul>
+                            <li><strong>7.1. Protección de Datos</strong>
+                                <ul>
+                                    <li>Encriptación de contraseñas (bcrypt).</li>
+                                    <li>Protección contra ataques XSS y CSRF.</li>
+                                    <li>Validación y sanitización de inputs.</li>
+                                    <li>Cumplimiento LOPDGDD.</li>
+                                </ul>
+                            </li>
+                            <li><strong>7.2. Gestión de Sesiones</strong>
+                                <ul>
+                                    <li>Expiración automática de sesiones.</li>
+                                    <li>Protección contra fuerza bruta.</li>
+                                    <li>Registro de accesos y actividades sospechosas.</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
 
                     <!-- 3. RESULTADOS -->

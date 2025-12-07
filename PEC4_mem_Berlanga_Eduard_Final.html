@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria Final PEC4 - RunTogether - Eduard Berlanga</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --uoc-cyan: #73edff;
+            --uoc-blue: #006a8e;
+            --uoc-dark: #00425a;
+            --uoc-light: #e0f7ff;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        /* ESTILOS GENERALES DE PÁGINA */
+        .page {
+            max-width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            padding: 25mm;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+
+        /* PORTADA */
+        .cover-header {
+            background: var(--uoc-dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 4rem;
+        }
+
+        .cover-logo {
+            width: 150px;
+            height: 150px;
+            background: var(--uoc-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--uoc-dark);
+            margin: 0 auto 2rem;
+            border-radius: 10px;
+        }
+
+        .cover-info {
+            border-top: 2px solid var(--uoc-blue);
+            padding-top: 2rem;
+        }
+
+        .cover-info p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .cover-info strong {
+            display: inline-block;
+            width: 200px;
+            color: var(--uoc-dark);
+        }
+
+        /* CONTENIDO */
+        h1 {
+            color: var(--uoc-dark);
+            border-bottom: 3px solid var(--uoc-cyan);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        h2 {
+            color: var(--uoc-blue);
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.3rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            color: var(--uoc-dark);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        ul,
+        ol {
+            margin-bottom: 1rem;
+            margin-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        .note {
+            background: var(--uoc-light);
+            border-left: 4px solid var(--uoc-blue);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--uoc-dark);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .status-done {
+            background: #28a745;
+        }
+
+        .status-wip {
+            background: #ffc107;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PORTADA -->
+    <div class="page">
+        <div class="cover-header">
+            <h1>MEMORIA FINAL DEL PROYECTO</h1>
+            <h2>PEC 4: Consolidación, Despliegue y Documentación</h2>
+            <p>Plataforma Web para Organización de Eventos de Running</p>
+        </div>
+
+        <div class="cover-logo">UOC</div>
+
+        <div class="cover-info">
+            <p><strong>Título del proyecto:</strong> RunTogether</p>
+            <p><strong>Autor:</strong> Eduard Berlanga González</p>
+            <p><strong>Asignatura:</strong> Programación Web</p>
+            <p><strong>Consultor:</strong> Mikel Zorrilla Berasategui</p>
+            <p><strong>Fecha de entrega:</strong> Diciembre 2025</p>
+            <p><strong>Repositorio GitHub:</strong> <a href="https://github.com/eduuber777/runtogether">Link al
+                    repositorio</a></p>
+            <p><strong>Despliegue Frontend:</strong> <a href="https://runthoger2020.netlify.app">Netlify App</a></p>
+            <p><strong>Despliegue Backend:</strong> <a href="https://runtogether.onrender.com">Render App</a></p>
+        </div>
+    </div>
+
+    <!-- ÍNDICE -->
+    <div class="page">
+        <h1>ÍNDICE DE CONTENIDOS</h1>
+        <ol>
+            <li><strong>1. Introducción y Objetivos</strong></li>
+            <li><strong>2. Evolución del Proyecto (PEC 2 a PEC 4)</strong>
+                <ul>
+                    <li>2.1. PEC 2: Fundamentos del Backend</li>
+                    <li>2.2. PEC 3: Desarrollo del Frontend</li>
+                    <li>2.3. PEC 4: Integración Final y Mejoras</li>
+                </ul>
+            </li>
+            <li><strong>3. Arquitectura Técnica</strong>
+                <ul>
+                    <li>3.1. Stack Tecnológico (MERN)</li>
+                    <li>3.2. Base de Datos (Prisma & MongoDB)</li>
+                    <li>3.3. Estructura del Proyecto</li>
+                </ul>
+            </li>
+            <li><strong>4. Funcionalidades Implementadas</strong>
+                <ul>
+                    <li>4.1. Gestión de Usuarios y Autenticación</li>
+                    <li>4.2. Gestión de Eventos e Inscripciones</li>
+                    <li>4.3. Comunidad y Social Wall</li>
+                    <li>4.4. Sistema de Notificaciones</li>
+                    <li>4.5. Panel de Administración</li>
+                </ul>
+            </li>
+            <li><strong>5. Manual de Instalación y Despliegue</strong>
+                <ul>
+                    <li>5.1. Instalación Local</li>
+                    <li>5.2. Despliegue en la Nube</li>
+                </ul>
+            </li>
+            <li><strong>6. Conclusiones y Futuras Mejoras</strong></li>
+        </ol>
+    </div>
+
+    <!-- 1. INTRODUCCIÓN -->
+    <div class="page">
+        <h1>1. INTRODUCCIÓN Y OBJETIVOS</h1>
+        <p>
+            El presente documento recoge la memoria final del proyecto <strong>RunTogether</strong>, una plataforma web
+            integral diseñada para la gestión y participación en eventos deportivos de running. Este proyecto ha sido
+            desarrollado a lo largo del semestre a través de entregas incrementales (PEC 2, PEC 3 y PEC 4), culminando
+            en una aplicación Full Stack completamente funcional y desplegada en la nube.
+        </p>
+        <p>
+            El objetivo principal ha sido crear una solución que permita a los organizadores publicar carreras y a los
+            corredores inscribirse, interactuar y formar comunidad, aplicando las mejores prácticas de desarrollo web
+            moderno.
+        </p>
+    </div>
+
+    <!-- 2. EVOLUCIÓN -->
+    <div class="page">
+        <h1>2. EVOLUCIÓN DEL PROYECTO</h1>
+
+        <h2>2.1. PEC 2: Fundamentos del Backend</h2>
+        <p>
+            En esta primera fase de desarrollo, se construyó la lógica del servidor. Se implementó una <strong>API
+                RESTful</strong> utilizando Node.js y Express. Los hitos clave fueron:
+        </p>
+        <ul>
+            <li>Diseño del modelo de datos con <strong>Prisma ORM</strong> (Usuarios, Eventos, Inscripciones).</li>
+            <li>Implementación de autenticación segura con <strong>JWT</strong> y hashing de contraseñas con
+                <strong>Bcrypt</strong>.</li>
+            <li>Creación de endpoints CRUD básicos para eventos y usuarios.</li>
+            <li>Validación de datos con <code>express-validator</code>.</li>
+        </ul>
+
+        <h2>2.2. PEC 3: Desarrollo del Frontend</h2>
+        <p>
+            La segunda fase se centró en la interfaz de usuario. Se desarrolló una <strong>Single Page Application
+                (SPA)</strong> con React y Vite. Los logros principales incluyeron:
+        </p>
+        <ul>
+            <li>Diseño responsive y moderno utilizando <strong>Tailwind CSS</strong>.</li>
+            <li>Gestión de rutas con <code>react-router-dom</code> (Públicas y Privadas).</li>
+            <li>Consumo de la API mediante <strong>Axios</strong> e interceptores para el manejo de tokens.</li>
+            <li>Contexto global de autenticación (<code>AuthContext</code>) para gestionar la sesión del usuario.</li>
+            <li>Vistas principales: Home, Login, Registro, Detalle de Evento y Perfil.</li>
+        </ul>
+
+        <h2>2.3. PEC 4: Integración Final y Mejoras</h2>
+        <p>
+            En esta fase final, se ha pulido la aplicación y se han añadido funcionalidades avanzadas solicitadas,
+            además de asegurar el despliegue. Las novedades incluyen:
+        </p>
+        <div class="note">
+            <strong>Novedades Destacadas:</strong>
+            <ul>
+                <li><strong>Sistema de Notificaciones:</strong> Alertas en tiempo real para inscripciones y actividad
+                    social.</li>
+                <li><strong>Panel de Administración Completo:</strong> Gestión integral de usuarios y eventos (Crear,
+                    Editar, Eliminar) desde el frontend.</li>
+                <li><strong>Muro Social y Comentarios:</strong> Interacción comunitaria completa.</li>
+                <li><strong>Lista de Participantes:</strong> Visualización pública de inscritos en cada evento.</li>
+                <li><strong>Despliegue en Producción:</strong> Backend en Render y Frontend en Netlify.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 3. ARQUITECTURA -->
+    <div class="page">
+        <h1>3. ARQUITECTURA TÉCNICA</h1>
+
+        <h2>3.1. Stack Tecnológico</h2>
+        <table style="width: 100%;">
+            <tr>
+                <th>Capa</th>
+                <th>Tecnología</th>
+                <th>Uso</th>
+            </tr>
+            <tr>
+                <td><strong>Frontend</strong></td>
+                <td>React 18 + Vite</td>
+                <td>Interfaz de usuario dinámica y rápida.</td>
+            </tr>
+            <tr>
+                <td><strong>Estilos</strong></td>
+                <td>Tailwind CSS</td>
+                <td>Diseño responsive y utilitario.</td>
+            </tr>
+            <tr>
+                <td><strong>Backend</strong></td>
+                <td>Node.js + Express</td>
+                <td>Servidor API REST.</td>
+            </tr>
+            <tr>
+                <td><strong>Base de Datos</strong></td>
+                <td>MongoDB + Prisma</td>
+                <td>Persistencia de datos y ORM.</td>
+            </tr>
+        </table>
+
+        <h2>3.2. Estructura de Base de Datos</h2>
+        <p>El esquema relacional definido en Prisma incluye los siguientes modelos principales:</p>
+        <ul>
+            <li><strong>User:</strong> Almacena credenciales, perfil y rol (ADMIN/RUNNER).</li>
+            <li><strong>Event:</strong> Datos de la carrera (fecha, lugar, precio, dificultad).</li>
+            <li><strong>Inscription:</strong> Tabla intermedia para relacionar Usuarios con Eventos.</li>
+            <li><strong>Post/Comment:</strong> Elementos sociales para el muro y comentarios de eventos.</li>
+            <li><strong>Notification:</strong> Alertas del sistema para el usuario.</li>
+        </ul>
+    </div>
+
+    <!-- 4. FUNCIONALIDADES -->
+    <div class="page">
+        <h1>4. FUNCIONALIDADES IMPLEMENTADAS</h1>
+
+        <h2>4.1. Gestión de Usuarios</h2>
+        <p>El sistema permite el ciclo completo de vida del usuario:</p>
+        <ul>
+            <li><strong>Registro:</strong> Validación de campos, email único y aceptación de términos (checkbox
+                implementado).</li>
+            <li><strong>Login:</strong> Generación de Token JWT persistente.</li>
+            <li><strong>Perfil:</strong> Edición de datos personales, avatar y cambio de contraseña.</li>
+        </ul>
+
+        <h2>4.2. Gestión de Eventos</h2>
+        <p>El núcleo de la aplicación. Los usuarios pueden:</p>
+        <ul>
+            <li>Ver listado de eventos con filtros (fecha, dificultad, ubicación).</li>
+            <li>Ver detalle del evento: mapa, descripción, precio y <strong>lista de participantes</strong>.</li>
+            <li>Inscribirse (con validación de plazas máximas) y cancelar inscripción.</li>
+        </ul>
+
+        <h2>4.3. Comunidad</h2>
+        <p>Se ha implementado un componente social robusto:</p>
+        <ul>
+            <li><strong>Muro Social:</strong> Los usuarios publican experiencias y fotos.</li>
+            <li><strong>Interacciones:</strong> Sistema de "Likes" y comentarios en posts.</li>
+            <li><strong>Comentarios en Eventos:</strong> Sección de preguntas y respuestas en cada evento.</li>
+        </ul>
+
+        <h2>4.4. Sistema de Notificaciones</h2>
+        <p>
+            Se ha desarrollado un sistema de notificaciones que alerta al usuario en la barra de navegación (icono de
+            campana con contador) cuando:
+        </p>
+        <ul>
+            <li>Se inscribe exitosamente a un evento.</li>
+            <li>Alguien comenta en su publicación.</li>
+            <li>Alguien da "like" a su publicación.</li>
+        </ul>
+
+        <h2>4.5. Panel de Administración</h2>
+        <p>
+            Acceso exclusivo para usuarios con rol <code>ADMIN</code>. Permite:
+        </p>
+        <ul>
+            <li>Ver estadísticas globales (total usuarios, eventos, inscripciones).</li>
+            <li><strong>Gestión de Usuarios:</strong> Ver lista, cambiar roles, eliminar usuarios.</li>
+            <li><strong>Gestión de Eventos:</strong> Formulario completo para Crear, Editar y Eliminar eventos sin tocar
+                código.</li>
+        </ul>
+    </div>
+
+    <!-- 5. INSTALACIÓN -->
+    <div class="page">
+        <h1>5. MANUAL DE INSTALACIÓN Y DESPLIEGUE</h1>
+
+        <h2>5.1. Instalación Local</h2>
+        <p>Para ejecutar el proyecto en local, siga estos pasos:</p>
+
+        <h3>Backend</h3>
+        <div class="code-block">
+            cd backend
+            npm install
+            # Crear archivo .env basado en .env.example
+            npx prisma migrate dev --name init
+            npm run seed # Carga usuarios de prueba
+            npm run dev
+        </div>
+
+        <h3>Frontend</h3>
+        <div class="code-block">
+            cd frontend
+            npm install
+            # Crear archivo .env con VITE_API_URL=http://localhost:3000/api
+            npm run dev
+        </div>
+
+        <p><strong>Usuarios de Prueba:</strong></p>
+        <ul>
+            <li>Admin: <code>admin@runtogether.com</code> / <code>admin123</code></li>
+            <li>Runner: <code>runner@test.com</code> / <code>runner123</code></li>
+        </ul>
+
+        <h2>5.2. Despliegue en la Nube</h2>
+        <p>La aplicación se encuentra operativa en las siguientes URLs:</p>
+        <ul>
+            <li><strong>Frontend:</strong> <a
+                    href="https://runthoger2020.netlify.app">https://runthoger2020.netlify.app</a></li>
+            <li><strong>Backend:</strong> <a
+                    href="https://runtogether.onrender.com">https://runtogether.onrender.com</a></li>
+        </ul>
+    </div>
+
+    <!-- 6. CONCLUSIONES -->
+    <div class="page">
+        <h1>6. CONCLUSIONES</h1>
+        <p>
+            El desarrollo de <strong>RunTogether</strong> ha permitido consolidar conocimientos avanzados de desarrollo
+            web Full Stack. Se ha logrado una aplicación robusta, segura y escalable.
+        </p>
+        <p>
+            La transición de una API básica en la PEC 2 a una aplicación completa con interfaz reactiva en la PEC 3, y
+            finalmente la adición de características complejas como notificaciones y administración en la PEC 4,
+            demuestra la capacidad de evolución del software.
+        </p>
+        <p>
+            Como líneas de trabajo futuro, se podría implementar un chat en tiempo real mediante WebSockets, integración
+            con pasarelas de pago reales (Stripe) y una aplicación móvil nativa utilizando React Native.
+        </p>
+    </div>
+
+</body>
+
+</html>

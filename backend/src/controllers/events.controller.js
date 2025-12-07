@@ -30,7 +30,7 @@ const getEventById = async (req, res) => {
 // Create event (Admin only)
 const createEvent = async (req, res) => {
     try {
-        const { title, description, date, location, distance, price, imageUrl } = req.body;
+        const { title, description, date, location, distance, price, imageUrl, difficulty, maxParticipants, elevation, terrainType } = req.body;
         const event = await prisma.event.create({
             data: {
                 title,
@@ -39,7 +39,11 @@ const createEvent = async (req, res) => {
                 location,
                 distance: parseFloat(distance),
                 price: parseFloat(price),
-                imageUrl
+                imageUrl,
+                difficulty,
+                maxParticipants: maxParticipants ? parseInt(maxParticipants) : null,
+                elevation: elevation ? parseFloat(elevation) : null,
+                terrainType
             }
         });
         res.status(201).json(event);
@@ -52,7 +56,7 @@ const createEvent = async (req, res) => {
 const updateEvent = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, date, location, distance, price, imageUrl } = req.body;
+        const { title, description, date, location, distance, price, imageUrl, difficulty, maxParticipants, elevation, terrainType } = req.body;
         const event = await prisma.event.update({
             where: { id }, // MongoDB ID is string
             data: {
@@ -62,7 +66,11 @@ const updateEvent = async (req, res) => {
                 location,
                 distance: distance ? parseFloat(distance) : undefined,
                 price: price ? parseFloat(price) : undefined,
-                imageUrl
+                imageUrl,
+                difficulty,
+                maxParticipants: maxParticipants ? parseInt(maxParticipants) : undefined,
+                elevation: elevation ? parseFloat(elevation) : undefined,
+                terrainType
             }
         });
         res.json(event);

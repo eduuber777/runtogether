@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria Técnica Profesional - RunTogether</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #00a8e8;
+            --accent-color: #00425a;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --code-bg: #1e1e1e;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #525659;
+            /* Fondo gris oscuro para simular visor de PDF */
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Simulación de Hoja A4 */
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25mm;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            box-sizing: border-box;
+            overflow: hidden;
+            /* Evita que contenido desborde */
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                min-height: auto;
+                page-break-after: always;
+            }
+        }
+
+        /* Tipografía y Encabezados */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 24pt;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 18pt;
+            color: var(--accent-color);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            background: var(--light-bg);
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 14pt;
+            margin-top: 30px;
+            color: #444;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 11pt;
+        }
+
+        /* Bloques de Código */
+        .code-block {
+            background: var(--code-bg);
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 9pt;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #333;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Diagramas y Figuras */
+        .figure {
+            border: 1px solid var(--border-color);
+            background: var(--light-bg);
+            padding: 15px;
+            margin: 25px 0;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .figure-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+            font-size: 10pt;
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 200px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            border: 2px dashed #adb5bd;
+            margin-bottom: 10px;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10pt;
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Portada */
+        .cover-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .university-logo {
+            font-size: 40pt;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            letter-spacing: 5px;
+        }
+
+        .project-title {
+            font-size: 36pt;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .project-subtitle {
+            font-size: 18pt;
+            color: #666;
+            margin-bottom: 80px;
+        }
+
+        .student-info {
+            text-align: left;
+            margin: 0 auto;
+            width: 80%;
+            border-top: 2px solid var(--primary-color);
+            padding-top: 40px;
+        }
+
+        .student-info p {
+            font-size: 14pt;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PÁGINA 1: PORTADA -->
+    <div class="page">
+        <div class="cover-container">
+            <div class="university-logo">UOC</div>
+
+            <div class="project-title">MEMORIA TÉCNICA FINAL</div>
+            <div class="project-subtitle">Desarrollo de Plataforma Web Full Stack "RunTogether"</div>
+
+            <div class="student-info">
+                <p><strong>Autor:</strong> Eduard Berlanga González</p>
+                <p><strong>Asignatura:</strong> Programación Web Avanzada</p>
+                <p><strong>Consultor:</strong> Mikel Zorrilla Berasategui</p>
+                <p><strong>Semestre:</strong> Otoño 2025</p>
+                <p><strong>Entregas:</strong> PEC 2, PEC 3, PEC 4</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: ÍNDICE -->
+    <div class="page">
+        <h1>Índice de Contenidos</h1>
+        <ul style="list-style-type: none; padding: 0;">
+            <li><strong>1. Introducción y Alcance</strong>
+                ................................................................. 3</li>
+            <li><strong>2. Metodología de Desarrollo</strong>
+                ................................................................. 5</li>
+            <li><strong>3. Arquitectura del Sistema</strong>
+                .................................................................... 8</li>
+            <li><strong>4. Diseño de Base de Datos</strong>
+                .................................................................... 12</li>
+            <li><strong>5. Implementación del Backend</strong>
+                ............................................................. 15</li>
+            <li><strong>6. Implementación del Frontend</strong>
+                ............................................................. 25</li>
+            <li><strong>7. Flujos de Usuario (Diagramas)</strong>
+                ........................................................... 35</li>
+            <li><strong>8. Sistema de Notificaciones y Tiempo Real</strong> ...........................................
+                42</li>
+            <li><strong>9. Panel de Administración</strong>
+                .................................................................... 48</li>
+            <li><strong>10. Pruebas y Validación</strong>
+                ........................................................................ 55</li>
+            <li><strong>11. Manual de Despliegue</strong>
+                ....................................................................... 60</li>
+            <li><strong>12. Conclusiones</strong>
+                .................................................................................... 65</li>
+        </ul>
+    </div>
+
+    <!-- PÁGINA 3: INTRODUCCIÓN -->
+    <div class="page">
+        <h1>1. Introducción y Alcance</h1>
+
+        <h2>1.1. Descripción del Proyecto</h2>
+        <p>
+            RunTogether es una solución tecnológica integral diseñada para modernizar la gestión de eventos deportivos
+            amateurs. En un contexto donde la organización de carreras populares sigue dependiendo de procesos manuales
+            o plataformas fragmentadas, RunTogether propone un ecosistema unificado.
+        </p>
+        <p>
+            La plataforma permite a los administradores crear y gestionar eventos con detalles técnicos precisos
+            (desnivel, tipo de terreno), mientras que ofrece a los corredores una experiencia social, permitiéndoles
+            inscribirse, comentar y compartir sus logros.
+        </p>
+
+        <h2>1.2. Objetivos Principales</h2>
+        <ul>
+            <li><strong>Gestión Centralizada:</strong> Unificar la creación de eventos y la gestión de inscripciones en
+                una sola base de datos.</li>
+            <li><strong>Experiencia de Usuario (UX):</strong> Proveer una interfaz rápida, responsive y accesible.</li>
+            <li><strong>Comunidad:</strong> Fomentar la interacción mediante un muro social y comentarios.</li>
+            <li><strong>Escalabilidad:</strong> Diseñar una arquitectura capaz de soportar picos de tráfico durante
+                aperturas de inscripciones.</li>
+        </ul>
+    </div>
+
+    <!-- PÁGINA 4: ARQUITECTURA -->
+    <div class="page">
+        <h1>3. Arquitectura del Sistema</h1>
+        <p>
+            La arquitectura seleccionada sigue el patrón cliente-servidor desacoplado, utilizando una API REST como
+            interfaz de comunicación. Esto permite que el frontend y el backend evolucionen de forma independiente.
+        </p>
+
+        <div class="figure">
+            <div class="mermaid">
+                graph TD
+                Client[Cliente Web (React/Vite)]
+                LB[Load Balancer (Render)]
+                API[API Server (Node.js/Express)]
+                DB[(MongoDB Atlas)]
+                Auth[Auth Service (JWT)]
+
+                Client -->|HTTP/JSON| LB
+                LB --> API
+                API -->|Query/ORM| DB
+                API -->|Verify| Auth
+            </div>
+            <div class="figure-caption">Figura 1: Diagrama de Arquitectura de Alto Nivel</div>
+        </div>
+
+        <h2>3.1. Componentes del Sistema</h2>
+        <p>
+            <strong>Frontend (SPA):</strong> Desarrollado en React 18. Se encarga de la renderización, gestión de estado
+            y validación de formularios en el cliente.
+        </p>
+        <p>
+            <strong>Backend (API REST):</strong> Desarrollado en Node.js con Express. Gestiona la lógica de negocio,
+            seguridad y acceso a datos.
+        </p>
+        <p>
+            <strong>Base de Datos:</strong> MongoDB alojado en Atlas. Se eligió una base de datos NoSQL por la
+            flexibilidad del esquema de documentos para los eventos y posts sociales.
+        </p>
+    </div>
+
+    <!-- PÁGINA 5: BASE DE DATOS -->
+    <div class="page">
+        <h1>4. Diseño de Base de Datos</h1>
+        <p>
+            Aunque utilizamos MongoDB, empleamos Prisma ORM para definir un esquema estricto y relaciones claras,
+            obteniendo lo mejor de ambos mundos: flexibilidad y estructura.
+        </p>
+
+        <div class="figure">
+            <div class="mermaid">
+                erDiagram
+                USER ||--o{ INSCRIPTION : realiza
+                USER ||--o{ POST : publica
+                USER ||--o{ COMMENT : escribe
+                USER ||--o{ NOTIFICATION : recibe
+                EVENT ||--o{ INSCRIPTION : tiene
+                EVENT ||--o{ COMMENT : tiene
+                POST ||--o{ COMMENT : tiene
+
+                USER {
+                string id PK
+                string email
+                string password
+                string role
+                }
+                EVENT {
+                string id PK
+                string title
+                datetime date
+                float price
+                }
+                INSCRIPTION {
+                string id PK
+                datetime createdAt
+                }
+            </div>
+            <div class="figure-caption">Figura 2: Diagrama Entidad-Relación (ERD)</div>
+        </div>
+    </div>
+
+    <!-- PÁGINA 6: BACKEND -->
+    <div class="page">
+        <h1>5. Implementación del Backend</h1>
+
+        <h2>5.1. Estructura de Controladores</h2>
+        <p>
+            Se ha seguido el patrón MVC (Modelo-Vista-Controlador), aunque en este caso la "Vista" es JSON. A
+            continuación se muestra la implementación del controlador de eventos, que demuestra el manejo de errores y
+            la interacción con Prisma.
+        </p>
+
+        <div class="code-block">
+            // backend/src/controllers/events.controller.js
+
+            const createEvent = async (req, res) => {
+            try {
+            const { title, description, date, location, distance, price } = req.body;
+
+            // Validación de negocio: No permitir eventos en el pasado
+            if (new Date(date) < new Date()) { return res.status(400).json({ message: 'La fecha debe ser futura' }); }
+                const event=await prisma.event.create({ data: { title, description, date: new Date(date), location,
+                distance: parseFloat(distance), price: parseFloat(price), // ... otros campos } });
+                res.status(201).json(event); } catch (error) { res.status(500).json({ message: 'Error interno' , error:
+                error.message }); } }; </div>
+        </div>
+
+        <!-- PÁGINA 7: FRONTEND -->
+        <div class="page">
+            <h1>6. Implementación del Frontend</h1>
+
+            <h2>6.1. Gestión de Estado con Context API</h2>
+            <p>
+                Para gestionar la sesión del usuario de forma global, se implementó un `AuthContext`. Esto evita el
+                "prop drilling" y permite que cualquier componente sepa si el usuario está logueado.
+            </p>
+
+            <div class="figure">
+                <div class="mermaid">
+                    stateDiagram-v2
+                    [*] --> CheckingToken
+                    CheckingToken --> LoggedIn : Token Valido
+                    CheckingToken --> LoggedOut : Token Invalido/No Existe
+                    LoggedIn --> LoggedOut : Logout Action
+                    LoggedOut --> LoggedIn : Login Success
+                </div>
+                <div class="figure-caption">Figura 3: Máquina de Estados de Autenticación</div>
+            </div>
+
+            <h2>6.2. Interfaz de Usuario (Screenshots)</h2>
+            <p>
+                A continuación se presentan las pantallas principales desarrolladas.
+            </p>
+
+            <div class="figure">
+                <div class="placeholder-image">
+                    [INSERTAR CAPTURA DE PANTALLA: HOME PAGE CON FILTROS]
+                </div>
+                <div class="figure-caption">Figura 4: Página de Inicio con listado de eventos y filtros activos.</div>
+            </div>
+
+            <div class="figure">
+                <div class="placeholder-image">
+                    [INSERTAR CAPTURA DE PANTALLA: DETALLE DE EVENTO]
+                </div>
+                <div class="figure-caption">Figura 5: Vista de detalle con mapa, descripción y botón de inscripción.
+                </div>
+            </div>
+        </div>
+
+        <!-- PÁGINA 8: FLUJOS -->
+        <div class="page">
+            <h1>7. Flujos de Usuario</h1>
+            <p>
+                Para entender la interacción entre los componentes, se detallan los diagramas de secuencia de los
+                procesos críticos.
+            </p>
+
+            <h2>7.1. Flujo de Inscripción a Evento</h2>
+            <div class="figure">
+                <div class="mermaid">
+                    sequenceDiagram
+                    actor User
+                    participant Frontend
+                    participant API
+                    participant DB
+                    participant NotificationService
+
+                    User->>Frontend: Clic en "Inscribirse"
+                    Frontend->>API: POST /inscriptions {eventId}
+                    API->>API: Validar Token (Auth Middleware)
+                    API->>DB: Verificar si ya está inscrito
+                    alt Ya inscrito
+                    DB-->>API: Error (Duplicate)
+                    API-->>Frontend: 400 Bad Request
+                    Frontend-->>User: Mostrar Error "Ya estás inscrito"
+                    else No inscrito
+                    API->>DB: Crear Inscripción
+                    DB-->>API: Success
+                    API->>NotificationService: Crear Notificación (Async)
+                    API-->>Frontend: 201 Created
+                    Frontend-->>User: Mostrar Éxito + Actualizar UI
+                    end
+                </div>
+                <div class="figure-caption">Figura 6: Diagrama de Secuencia del proceso de inscripción.</div>
+            </div>
+        </div>
+
+        <!-- PÁGINA 9: NOTIFICACIONES -->
+        <div class="page">
+            <h1>8. Sistema de Notificaciones</h1>
+            <p>
+                En la PEC 4 se implementó un sistema de notificaciones para mejorar la retención de usuarios.
+            </p>
+
+            <h2>8.1. Lógica de Polling</h2>
+            <p>
+                Debido a restricciones de infraestructura (servidores serverless que duermen), se optó por un sistema de
+                "Short Polling" en lugar de WebSockets. El cliente consulta cada 60 segundos si hay nuevas
+                notificaciones.
+            </p>
+
+            <div class="code-block">
+                // frontend/src/components/Navbar.jsx
+
+                useEffect(() => {
+                if (user) {
+                const fetchUnread = async () => {
+                const { data } = await api.get('/notifications/unread-count');
+                setUnreadCount(data.count);
+                };
+
+                fetchUnread(); // Primera carga
+                const interval = setInterval(fetchUnread, 60000); // Polling cada 1 min
+
+                return () => clearInterval(interval); // Cleanup
+                }
+                }, [user]);
+            </div>
+        </div>
+
+        <!-- PÁGINA 10: CONCLUSIONES -->
+        <div class="page">
+            <h1>12. Conclusiones</h1>
+            <p>
+                El proyecto RunTogether ha alcanzado un nivel de madurez técnica significativo. Se han superado los
+                retos iniciales de configuración de entorno y despliegue, logrando una aplicación estable y segura.
+            </p>
+            <p>
+                La inclusión de diagramas de flujo y arquitectura en esta memoria refleja la profundidad del análisis
+                realizado antes y durante la codificación. La separación de responsabilidades y el uso de patrones de
+                diseño aseguran que el código sea mantenible y escalable.
+            </p>
+            <p>
+                <strong>Trabajo Futuro:</strong>
+            <ul>
+                <li>Implementación de WebSockets para notificaciones instantáneas reales.</li>
+                <li>Integración con pasarela de pagos Stripe para eventos de pago.</li>
+                <li>Desarrollo de una App móvil nativa con React Native reutilizando el mismo Backend.</li>
+            </ul>
+            </p>
+        </div>
+
+</body>
+
+</html>
