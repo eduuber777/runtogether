@@ -16,65 +16,34 @@ const Home = () => {
         dateTo: ''
     });
 
+    // Debounce filters to avoid too many API calls
     useEffect(() => {
-        const fetchEvents = async () => {
-            try {
-                const { data } = await api.get('/events');
-                setEvents(data);
-                setFilteredEvents(data);
-            } catch (error) {
-                console.error('Error fetching events:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
+        const timer = setTimeout(() => {
+            fetchEvents();
+        }, 500);
 
-        fetchEvents();
-    }, []);
+        return () => clearTimeout(timer);
+    }, [filters]);
 
-    useEffect(() => {
-        applyFilters();
-    }, [filters, events]);
+    const fetchEvents = async () => {
+        setLoading(true);
+        try {
+            // Build query string from filters
+            const params = new URLSearchParams();
+            if (filters.search) params.append('location', filters.search); // Using search input for location as per backend logic or general search
+            if (filters.location) params.append('location', filters.location);
+            if (filters.difficulty) params.append('difficulty', filters.difficulty);
+            if (filters.dateFrom) params.append('dateFrom', filters.dateFrom);
+            if (filters.dateTo) params.append('dateTo', filters.dateTo);
 
-    const applyFilters = () => {
-        let filtered = [...events];
-
-        // Search filter
-        if (filters.search) {
-            filtered = filtered.filter(event =>
-                event.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-                event.description.toLowerCase().includes(filters.search.toLowerCase())
-            );
+            const { data } = await api.get(`/events?${params.toString()}`);
+            setEvents(data);
+            setFilteredEvents(data); // In server-side mode, events are already filtered
+        } catch (error) {
+            console.error('Error fetching events:', error);
+        } finally {
+            setLoading(false);
         }
-
-        // Location filter
-        if (filters.location) {
-            filtered = filtered.filter(event =>
-                event.location.toLowerCase().includes(filters.location.toLowerCase())
-            );
-        }
-
-        // Difficulty filter
-        if (filters.difficulty) {
-            filtered = filtered.filter(event =>
-                event.difficulty === filters.difficulty
-            );
-        }
-
-        // Date range filter
-        if (filters.dateFrom) {
-            filtered = filtered.filter(event =>
-                new Date(event.date) >= new Date(filters.dateFrom)
-            );
-        }
-
-        if (filters.dateTo) {
-            filtered = filtered.filter(event =>
-                new Date(event.date) <= new Date(filters.dateTo)
-            );
-        }
-
-        setFilteredEvents(filtered);
     };
 
     const handleFilterChange = (e) => {
