@@ -137,6 +137,7 @@ const EventDetail = () => {
                         src={event.imageUrl || 'https://via.placeholder.com/1200x400'}
                         alt={event.title}
                         className="w-full h-96 object-cover"
+                        onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/1200x400?text=Imagen+No+Disponible'; }}
                     />
                     {event.difficulty && (
                         <span className="absolute top-4 right-4 bg-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
@@ -260,6 +261,7 @@ const EventDetail = () => {
                                         src={p.user.photoUrl}
                                         alt={p.user.name}
                                         className="w-16 h-16 rounded-full mx-auto object-cover mb-2"
+                                        onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/150?text=User'; }}
                                     />
                                 ) : (
                                     <div className="w-16 h-16 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mx-auto mb-2">

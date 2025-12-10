@@ -38,6 +38,7 @@ const EventCard = ({ event }) => {
                     src={event.imageUrl || 'https://via.placeholder.com/400x200?text=Evento+RunTogether'}
                     alt={event.title}
                     className="w-full h-48 object-cover"
+                    onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/400x200?text=Imagen+No+Disponible'; }}
                 />
                 {event.difficulty && (
                     <span className={`absolute top-2 right-2 px-3 py-1 rounded-full text-xs font-semibold ${getDifficultyColor(event.difficulty)}`}>

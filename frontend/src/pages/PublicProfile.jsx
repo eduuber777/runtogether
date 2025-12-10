@@ -46,6 +46,7 @@ const PublicProfile = () => {
                                 src={profile.photoUrl}
                                 alt={profile.name}
                                 className="w-24 h-24 rounded-full border-4 border-white object-cover shadow-md"
+                                onError={(e) => { e.target.onerror = null; e.target.src = 'https://via.placeholder.com/150?text=User'; }}
                             />
                         ) : (
                             <div className="w-24 h-24 rounded-full border-4 border-white bg-gray-200 flex items-center justify-center text-3xl font-bold text-gray-500 shadow-md">
@@ -97,8 +98,8 @@ const PublicProfile = () => {
                                     </div>
                                 </div>
                                 <span className={`px-3 py-1 rounded-full text-xs font-semibold ${new Date(inscription.event.date) < new Date()
-                                        ? 'bg-gray-100 text-gray-800'
-                                        : 'bg-green-100 text-green-800'
+                                    ? 'bg-gray-100 text-gray-800'
+                                    : 'bg-green-100 text-green-800'
                                     }`}>
                                     {new Date(inscription.event.date) < new Date() ? 'Completado' : 'Próximo'}
                                 </span>
