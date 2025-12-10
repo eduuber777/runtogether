@@ -1,12 +1,6 @@
 const { PrismaClient } = require('@prisma/client');
 
-const prisma = new PrismaClient({
-    datasources: {
-        db: {
-            url: "mongodb+srv://mblanch2018_db_userEuRXx9caMGYpWacm:1YoDLVbhi2PpDVXY@cluster0.clhhejh.mongodb.net/runtogether?retryWrites=true&w=majority"
-        }
-    }
-});
+const prisma = new PrismaClient();
 
 async function main() {
     console.log('--- INICIANDO ACTUALIZACIÓN DE PRODUCCIÓN ---');
