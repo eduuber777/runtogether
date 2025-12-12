@@ -103,6 +103,18 @@ const AdminDashboard = () => {
         setEditingEvent(null);
     };
 
+    const handleSeedDatabase = async () => {
+        if (!window.confirm('¿Crear eventos de ejemplo en la base de datos?')) return;
+
+        try {
+            const { data } = await api.post('/seed');
+            toast.success(data.message);
+            fetchData(); // Refresh data
+        } catch (error) {
+            toast.error(error.response?.data?.message || 'Error al poblar base de datos');
+        }
+    };
+
     if (user?.role !== 'ADMIN') {
         return (
             <div className="text-center py-10">
@@ -245,7 +257,14 @@ const AdminDashboard = () => {
             {/* Events Management */}
             {activeTab === 'events' && (
                 <div className="space-y-6">
-                    <div className="flex justify-end">
+                    <div className="flex justify-between items-center">
+                        <Button
+                            onClick={handleSeedDatabase}
+                            variant="secondary"
+                            className="bg-green-500 hover:bg-green-600 text-white"
+                        >
+                            🌱 Poblar Base de Datos
+                        </Button>
                         <Button onClick={() => setShowEventModal(true)}>
                             + Nuevo Evento
                         </Button>
