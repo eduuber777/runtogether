@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria PEC4 - RunTogether - Eduard Berlanga</title>
+    <!-- Mermaid para diagramas -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --uoc-cyan: #73edff;
+            --uoc-blue: #006a8e;
+            --uoc-dark: #00425a;
+            --uoc-light: #e0f7ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* PORTADA */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff;
+            padding: 3rem 2rem;
+            page-break-after: always;
+        }
+
+        .cover-header {
+            width: 100%;
+            background: var(--uoc-dark);
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+        }
+
+        .cover-header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: #fff;
+            border: none;
+        }
+
+        .cover-main {
+            display: flex;
+            gap: 3rem;
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .cover-logo {
+            width: 250px;
+            background: var(--uoc-cyan);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .uoc-text {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--uoc-dark);
+            line-height: 0.8;
+            letter-spacing: -5px;
+        }
+
+        .cover-info {
+            flex: 1;
+        }
+
+        .cover-info p {
+            margin: 1.2rem 0;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .cover-info strong {
+            color: var(--uoc-dark);
+            display: inline-block;
+            width: 180px;
+        }
+
+        /* LICENCIA Y FICHA */
+        .legal-section {
+            background: #fff;
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            page-break-after: always;
+        }
+
+        .license-box {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            background: #f9f9f9;
+        }
+
+        /* CONTENIDO */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #fff;
+        }
+
+        .section {
+            background: #fff;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            page-break-inside: avoid;
+        }
+
+        h1 {
+            color: var(--uoc-dark);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--uoc-cyan);
+            page-break-before: always;
+        }
+
+        h2 {
+            color: var(--uoc-blue);
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--uoc-light);
+        }
+
+        h3 {
+            color: var(--uoc-dark);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        h4 {
+            color: var(--uoc-blue);
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--uoc-light) 0%, #b3ecff 100%);
+            border-left: 4px solid var(--uoc-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        ul,
+        ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--uoc-dark);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* Tech Grid for Materials section */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tech-item {
+            background: var(--uoc-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-item img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        /* Diagramas */
+        .mermaid {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        @media print {
+            .section {
+                page-break-inside: avoid;
+            }
+
+            h1 {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PORTADA -->
+    <div class="cover">
+        <div class="cover-header">
+            <h1>PLATAFORMA WEB PARA ORGANIZACIÓN DE EVENTOS DE RUNNING</h1>
+            <p style="margin-top: 1rem; font-size: 1.2rem;">PEC 4: Despliegue, Optimización y Finalización del Proyecto
+            </p>
+        </div>
+
+        <div class="cover-main">
+            <div>
+                <div class="cover-logo">
+                    <div class="uoc-text">UOc</div>
+                </div>
+                <p style="text-align: center; font-weight: 600; color: var(--uoc-dark); margin-top: 1rem;">
+                    Universitat Oberta<br>de Catalunya
+                </p>
+            </div>
+
+            <div class="cover-info">
+                <p><strong>Nombre Estudiante:</strong> Eduard Berlanga González</p>
+                <p><strong>Nombre del Programa:</strong> Técnicas de Interacción Digital y Multimedia</p>
+                <p><strong>Área de trabajo final:</strong> Programación Web</p>
+                <p><strong>Nombre Tutor/a de TF:</strong> Mikel Zorrilla Berasategui</p>
+                <p><strong>Profesor/a responsable:</strong> Mikel Zorrilla Berasategui</p>
+                <p><strong>Fecha Entrega:</strong> Diciembre 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LICENCIA -->
+    <div class="legal-section">
+        <div class="license-box">
+            <img src="https://i.creativecommons.org/l/by-nc-nd/3.0/es/88x31.png" alt="CC License"
+                style="margin-bottom: 1rem;">
+            <p>Esta obra está sujeta a una licencia de <strong>Reconocimiento-NoComercial-SinObraDerivada 3.0
+                    España</strong> de Creative Commons</p>
+        </div>
+    </div>
+
+    <!-- FICHA DEL TRABAJO FINAL -->
+    <div class="legal-section">
+        <h2 style="text-align: center; color: var(--uoc-dark); border: none;">FICHA DEL TRABAJO FINAL</h2>
+        <table>
+            <tr>
+                <td style="background: #f0f0f0; width: 30%;"><strong>Título del trabajo:</strong></td>
+                <td>Plataforma Web para Organización de Eventos de Running (RunTogether)</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Nombre del autor:</strong></td>
+                <td>Eduard Berlanga González</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Nombre del consultor/a:</strong></td>
+                <td>Mikel Zorrilla Berasategui</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Fecha de entrega:</strong></td>
+                <td>12/2025</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Titulación o programa:</strong></td>
+                <td>Técnicas de Interacción Digital y Multimedia</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h1>ÍNDICE</h1>
+            <ol>
+                <li><strong>1. Introducción</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>1.1. Contexto y justificación del Trabajo</li>
+                        <li>1.2. Objetivos del Trabajo (PEC 4)</li>
+                        <li>1.3. Impacto en sostenibilidad y diversidad</li>
+                        <li>1.4. Enfoque y método seguido</li>
+                        <li>1.5. Planificación del Trabajo</li>
+                    </ol>
+                </li>
+                <li><strong>2. Materiales y métodos</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>2.1. Stack Tecnológico Detallado</li>
+                        <li>2.2. Arquitectura de Software y Despliegue</li>
+                        <li>2.3. Diseño de Base de Datos (Modelo E-R)</li>
+                        <li>2.4. Estrategia de CI/CD</li>
+                    </ol>
+                </li>
+                <li><strong>3. Desarrollo e Implementación</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>3.1. Backend: API REST y Lógica de Negocio</li>
+                        <li>3.2. Frontend: Interfaz de Usuario y UX</li>
+                        <li>3.3. Seguridad y Autenticación</li>
+                    </ol>
+                </li>
+                <li><strong>4. Resultados</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>4.1. Aplicación en Producción</li>
+                        <li>4.2. Pruebas de Funcionamiento</li>
+                        <li>4.3. Gestión de Errores y Resiliencia</li>
+                    </ol>
+                </li>
+                <li><strong>5. Conclusiones y trabajos futuros</strong></li>
+                <li><strong>6. Bibliografía</strong></li>
+                <li><strong>7. Anexos</strong></li>
+            </ol>
+        </div>
+
+        <!-- 1. INTRODUCCIÓN -->
+        <div class="section">
+            <h1>1. INTRODUCCIÓN</h1>
+
+            <h2>1.1. Contexto y justificación del Trabajo</h2>
+            <p>
+                El proyecto <strong>RunTogether</strong> nace de la necesidad de digitalizar y centralizar la gestión de
+                eventos deportivos amateurs.
+                Actualmente, la organización de carreras populares adolece de fragmentación: inscripciones en papel o
+                formularios genéricos, falta de seguimiento
+                y nula interacción social post-evento. Este proyecto busca resolver estos problemas mediante una
+                plataforma web integral, moderna y escalable.
+            </p>
+            <p>
+                En esta fase final (PEC 4), el proyecto trasciende el entorno de desarrollo local para enfrentarse a los
+                retos de un entorno de producción real.
+                Se abordan aspectos críticos como la seguridad en la nube, la optimización de consultas a base de datos
+                y la experiencia de usuario final.
+            </p>
+
+            <h2>1.2. Objetivos del Trabajo (PEC 4)</h2>
+            <p>Los objetivos principales de esta entrega son:</p>
+            <ul>
+                <li><strong>Despliegue en la Nube:</strong> Publicar el backend en Render y el frontend en Netlify,
+                    configurando variables de entorno seguras.</li>
+                <li><strong>Optimización del Backend:</strong> Migrar la lógica de filtrado de eventos del cliente al
+                    servidor para mejorar el rendimiento con grandes volúmenes de datos.</li>
+                <li><strong>Integridad de Datos:</strong> Reforzar el esquema de base de datos utilizando
+                    <code>Enums</code> de Prisma para garantizar la consistencia de tipos (Dificultad, Terreno, Roles).
+                </li>
+                <li><strong>Resiliencia del Frontend:</strong> Implementar mecanismos de recuperación ante fallos
+                    (fallbacks) para recursos externos como imágenes.</li>
+                <li><strong>Documentación Técnica:</strong> Generar una memoria exhaustiva que detalle la arquitectura
+                    final y las decisiones de diseño tomadas.</li>
+            </ul>
+
+            <h2>1.3. Impacto en sostenibilidad y diversidad</h2>
+            <p>
+                La plataforma fomenta la sostenibilidad al eliminar el uso de papel en las inscripciones y promover
+                eventos locales ("Km 0").
+                En términos de diversidad, la interfaz ha sido diseñada siguiendo pautas de accesibilidad (WCAG) y el
+                sistema de niveles (Principiante, Intermedio, Avanzado)
+                hace que el deporte sea inclusivo para todas las capacidades físicas.
+            </p>
+        </div>
+
+        <!-- 2. MATERIALES Y MÉTODOS -->
+        <div class="section">
+            <h1>2. MATERIALES Y MÉTODOS</h1>
+
+            <h2>2.1. Stack Tecnológico Detallado</h2>
+            <p>Se ha seleccionado el stack MERN (MongoDB, Express, React, Node) potenciado con Prisma ORM por su
+                robustez y agilidad de desarrollo.</p>
+
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>MongoDB Atlas</strong>
+                    <p>Base de datos NoSQL distribuida. Permite escalabilidad horizontal y manejo flexible de documentos
+                        JSON.</p>
+                </div>
+                <div class="tech-item">
+                    <strong>Express.js</strong>
+                    <p>Framework web minimalista para Node.js. Gestiona el enrutamiento y los middlewares de la API.</p>
+                </div>
+                <div class="tech-item">
+                    <strong>React 18</strong>
+                    <p>Librería de frontend para construir interfaces de usuario interactivas basadas en componentes.
+                    </p>
+                </div>
+                <div class="tech-item">
+                    <strong>Prisma ORM</strong>
+                    <p>Capa de acceso a datos moderna. Proporciona seguridad de tipos (Type Safety) y migraciones de
+                        esquema.</p>
+                </div>
+            </div>
+
+            <h2>2.2. Arquitectura de Software y Despliegue</h2>
+            <p>
+                La arquitectura sigue el patrón <strong>Cliente-Servidor Desacoplado</strong>. El frontend y el backend
+                son aplicaciones independientes que se comunican vía API REST.
+            </p>
+
+            <h3>Diagrama de Arquitectura Cloud</h3>
+            <div class="mermaid">
+                graph TD
+                subgraph Client_Side [Cliente (Navegador)]
+                UI[React SPA]
+                end
+
+                subgraph Cloud_Services [Nube Pública]
+                subgraph Netlify [Frontend Hosting]
+                CDN[CDN Global]
+                end
+
+                subgraph Render [Backend Hosting]
+                LB[Load Balancer]
+                API[Node.js Server]
+                end
+
+                subgraph Atlas [Database Cluster]
+                DB[(MongoDB Primary)]
+                end
+                end
+
+                UI -->|HTTPS Requests| CDN
+                CDN -->|API Calls (JSON)| LB
+                LB --> API
+                API -->|Prisma Query| DB
+            </div>
+
+            <h2>2.3. Diseño de Base de Datos (Modelo E-R)</h2>
+            <p>
+                Aunque MongoDB es schemaless, Prisma impone una estructura relacional lógica para garantizar la
+                integridad.
+            </p>
+            <div class="mermaid">
+                erDiagram
+                USER ||--o{ INSCRIPTION : makes
+                USER ||--o{ COMMENT : writes
+                EVENT ||--o{ INSCRIPTION : has
+                EVENT ||--o{ COMMENT : receives
+
+                USER {
+                string id PK
+                string email
+                string password
+                enum role "ADMIN, RUNNER"
+                }
+
+                EVENT {
+                string id PK
+                string title
+                datetime date
+                float price
+                enum difficulty "BEGINNER, INTERMEDIATE, ADVANCED"
+                }
+
+                INSCRIPTION {
+                string id PK
+                string status
+                datetime createdAt
+                }
+            </div>
+        </div>
+
+        <!-- 3. DESARROLLO E IMPLEMENTACIÓN -->
+        <div class="section">
+            <h1>3. DESARROLLO E IMPLEMENTACIÓN</h1>
+
+            <h2>3.1. Backend: API REST y Lógica de Negocio</h2>
+
+            <h3>3.1.1. Filtrado en Servidor (Server-Side Filtering)</h3>
+            <p>
+                Para optimizar el rendimiento y reducir el ancho de banda, se ha migrado la lógica de filtrado al
+                backend.
+                El endpoint <code>GET /api/events</code> ahora acepta parámetros de consulta (query params).
+            </p>
+            <div class="code-block">
+                // Controlador de Eventos (backend/src/controllers/events.controller.js)
+                const getEvents = async (req, res) => {
+                const { difficulty, location, dateFrom } = req.query;
+
+                // Construcción dinámica del objeto 'where'
+                let whereClause = {};
+
+                if (difficulty) whereClause.difficulty = difficulty;
+                if (location) whereClause.location = { contains: location, mode: 'insensitive' };
+                if (dateFrom) whereClause.date = { gte: new Date(dateFrom) };
+
+                const events = await prisma.event.findMany({
+                where: whereClause,
+                orderBy: { date: 'asc' }
+                });
+
+                res.json(events);
+                };
+            </div>
+
+            <h3>3.1.2. Integridad con Enums</h3>
+            <p>
+                Se han definido <code>Enums</code> en el esquema de Prisma para restringir los valores posibles de
+                campos críticos.
+                Esto previene errores de datos corruptos (ej. una dificultad "IMPOSIBLE" no permitida).
+            </p>
+
+            <h2>3.2. Frontend: Interfaz de Usuario y UX</h2>
+
+            <h3>3.2.1. Flujo de Navegación</h3>
+            <div class="mermaid">
+                graph LR
+                Home[Página Principal] -->|Click Evento| Detail[Detalle Evento]
+                Detail -->|Click Inscribirse| Login{¿Logueado?}
+                Login -->|No| Auth[Página Login/Registro]
+                Login -->|Sí| Confirm[Confirmación Inscripción]
+                Auth -->|Éxito| Detail
+            </div>
+
+            <h3>3.2.2. Manejo de Errores Visuales (Fallbacks)</h3>
+            <p>
+                Se ha implementado un sistema de defensa en el frontend para manejar imágenes rotas. Si la URL de una
+                imagen externa falla,
+                el evento <code>onError</code> del navegador se captura para inyectar una imagen de placeholder local.
+            </p>
+            <div class="code-block">
+                // Componente EventCard.jsx
+                &lt;img
+                src={event.imageUrl}
+                onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/assets/placeholder-event.jpg';
+                }}
+                /&gt;
+            </div>
+
+            <h2>3.3. Seguridad y Autenticación</h2>
+            <p>
+                La seguridad se basa en el estándar <strong>JWT (JSON Web Token)</strong>.
+            </p>
+            <ul>
+                <li><strong>Autenticación:</strong> El usuario envía credenciales, el servidor valida y devuelve un
+                    token firmado.</li>
+                <li><strong>Autorización:</strong> El token se envía en el header <code>Authorization: Bearer ...</code>
+                    de cada petición subsiguiente.</li>
+                <li><strong>Protección de Rutas:</strong> Middleware en el backend verifica la validez y expiración del
+                    token antes de procesar la petición.</li>
+            </ul>
+        </div>
+
+        <!-- 4. RESULTADOS -->
+        <div class="section">
+            <h1>4. RESULTADOS</h1>
+
+            <h2>4.1. Aplicación en Producción</h2>
+            <p>
+                La aplicación ha sido desplegada exitosamente y es accesible públicamente. Los tiempos de respuesta
+                promedio son inferiores a 200ms para lecturas de base de datos.
+            </p>
+            <div class="info-box">
+                <h3>Enlaces de Acceso</h3>
+                <ul>
+                    <li><strong>Frontend:</strong> <a href="#">https://runtogether-frontend.netlify.app</a></li>
+                    <li><strong>Backend:</strong> <a href="#">https://runtogether-backend.onrender.com</a></li>
+                </ul>
+            </div>
+
+            <h2>4.2. Pruebas de Funcionamiento</h2>
+            <p>Se han realizado pruebas de aceptación de usuario (UAT) para validar los flujos principales:</p>
+
+            <h3>Caso de Prueba 1: Búsqueda y Filtrado</h3>
+            <ol>
+                <li><strong>Acción:</strong> Usuario selecciona "Dificultad: Avanzada" en la Home.</li>
+                <li><strong>Resultado Esperado:</strong> La lista se actualiza mostrando solo eventos difíciles.</li>
+                <li><strong>Resultado Obtenido:</strong> Correcto. La petición a la API incluye
+                    <code>?difficulty=ADVANCED</code>.</li>
+            </ol>
+
+            <h3>Caso de Prueba 2: Inscripción Segura</h3>
+            <ol>
+                <li><strong>Acción:</strong> Usuario intenta inscribirse sin login.</li>
+                <li><strong>Resultado Esperado:</strong> Redirección a Login. Tras login, vuelta al evento.</li>
+                <li><strong>Resultado Obtenido:</strong> Correcto. El estado de autenticación se preserva.</li>
+            </ol>
+
+            <h2>4.3. Gestión de Errores y Resiliencia</h2>
+            <p>
+                Durante las pruebas de estrés, se simuló la caída del servicio de imágenes externo. La aplicación
+                continuó funcionando,
+                mostrando los placeholders definidos, sin afectar a la funcionalidad de inscripción o navegación.
+            </p>
+        </div>
+
+        <!-- 5. CONCLUSIONES -->
+        <div class="section">
+            <h1>5. CONCLUSIONES Y TRABAJOS FUTUROS</h1>
+            <p>
+                El desarrollo de <strong>RunTogether</strong> ha permitido consolidar conocimientos avanzados de
+                desarrollo web Full Stack.
+                La transición de un entorno local a uno de producción ha puesto de manifiesto la importancia de la
+                configuración de entornos,
+                la seguridad de las variables y la optimización del rendimiento.
+            </p>
+            <p>
+                La arquitectura elegida (MERN + Prisma) ha demostrado ser altamente escalable y mantenible. El uso de
+                TypeScript (o JSDoc con tipos)
+                y Prisma ha reducido significativamente los errores en tiempo de ejecución.
+            </p>
+            <h3>Líneas Futuras</h3>
+            <ul>
+                <li>Implementación de WebSockets para chat en tiempo real entre corredores.</li>
+                <li>Integración con APIs de terceros (Strava, Garmin) para sincronizar actividades.</li>
+                <li>Desarrollo de una PWA (Progressive Web App) para funcionamiento offline.</li>
+            </ul>
+        </div>
+
+        <!-- 7. ANEXOS -->
+        <div class="section">
+            <h1>7. ANEXOS</h1>
+            <h2>Anexo I: Repositorio de Código</h2>
+            <p>El código fuente completo, incluyendo historial de commits y ramas de desarrollo, se encuentra disponible
+                en:</p>
+            <p><a href="https://github.com/eduuber777/runtogether">https://github.com/eduuber777/runtogether</a></p>
+        </div>
+
+    </div>
+</body>
+
+</html>

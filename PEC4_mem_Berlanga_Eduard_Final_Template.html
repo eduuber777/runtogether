@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria PEC4 - RunTogether - Eduard Berlanga</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --uoc-cyan: #73edff;
+            --uoc-blue: #006a8e;
+            --uoc-dark: #00425a;
+            --uoc-light: #e0f7ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* PORTADA */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff;
+            padding: 3rem 2rem;
+            page-break-after: always;
+        }
+
+        .cover-header {
+            width: 100%;
+            background: var(--uoc-dark);
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+        }
+
+        .cover-header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            color: #fff;
+            border: none;
+        }
+
+        .cover-main {
+            display: flex;
+            gap: 3rem;
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .cover-logo {
+            width: 250px;
+            background: var(--uoc-cyan);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .uoc-text {
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--uoc-dark);
+            line-height: 0.8;
+            letter-spacing: -5px;
+        }
+
+        .cover-info {
+            flex: 1;
+        }
+
+        .cover-info p {
+            margin: 1.2rem 0;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .cover-info strong {
+            color: var(--uoc-dark);
+            display: inline-block;
+            width: 180px;
+        }
+
+        /* LICENCIA Y FICHA */
+        .legal-section {
+            background: #fff;
+            padding: 3rem 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            page-break-after: always;
+        }
+
+        .license-box {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            background: #f9f9f9;
+        }
+
+        /* CONTENIDO */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #fff;
+        }
+
+        .section {
+            background: #fff;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            page-break-inside: avoid;
+        }
+
+        h1 {
+            color: var(--uoc-dark);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--uoc-cyan);
+            page-break-before: always;
+        }
+
+        h2 {
+            color: var(--uoc-blue);
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--uoc-light);
+        }
+
+        h3 {
+            color: var(--uoc-dark);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        h4 {
+            color: var(--uoc-blue);
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, var(--uoc-light) 0%, #b3ecff 100%);
+            border-left: 4px solid var(--uoc-blue);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        ul,
+        ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--uoc-dark);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .endpoint {
+            background: #fff;
+            border: 1px solid var(--uoc-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .endpoint-method {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+
+        .method-get {
+            background: #61affe;
+            color: #fff;
+        }
+
+        .method-post {
+            background: #49cc90;
+            color: #fff;
+        }
+
+        .method-put {
+            background: #fca130;
+            color: #fff;
+        }
+
+        .method-delete {
+            background: #f93e3e;
+            color: #fff;
+        }
+
+        .footer {
+            background: var(--uoc-dark);
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer h2 {
+            color: var(--uoc-cyan);
+            border: none;
+        }
+
+        /* Tech Grid for Materials section */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tech-item {
+            background: var(--uoc-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-item img {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .figure {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .figure img {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #eee;
+        }
+
+        .figure-caption {
+            margin-top: 1rem;
+            font-style: italic;
+            color: #666;
+        }
+
+        @media print {
+            .section {
+                page-break-inside: avoid;
+            }
+
+            h1 {
+                page-break-before: always;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cover-main {
+                flex-direction: column;
+            }
+
+            .cover-logo {
+                width: 200px;
+            }
+
+            .uoc-text {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PORTADA -->
+    <div class="cover">
+        <div class="cover-header">
+            <h1>PLATAFORMA WEB PARA ORGANIZACIÓN DE EVENTOS DE RUNNING</h1>
+            <p style="margin-top: 1rem; font-size: 1.2rem;">PEC 4: Despliegue y Finalización del Proyecto</p>
+        </div>
+
+        <div class="cover-main">
+            <div>
+                <div class="cover-logo">
+                    <div class="uoc-text">UOc</div>
+                </div>
+                <p style="text-align: center; font-weight: 600; color: var(--uoc-dark); margin-top: 1rem;">
+                    Universitat Oberta<br>de Catalunya
+                </p>
+            </div>
+
+            <div class="cover-info">
+                <p><strong>Nombre Estudiante:</strong> Eduard Berlanga González</p>
+                <p><strong>Nombre del Programa:</strong> Técnicas de Interacción Digital y Multimedia</p>
+                <p><strong>Área de trabajo final:</strong> Programación Web</p>
+                <p><strong>Nombre Tutor/a de TF:</strong> Mikel Zorrilla Berasategui</p>
+                <p><strong>Profesor/a responsable:</strong> Mikel Zorrilla Berasategui</p>
+                <p><strong>Fecha Entrega:</strong> Diciembre 2025</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LICENCIA -->
+    <div class="legal-section">
+        <div class="license-box">
+            <img src="https://i.creativecommons.org/l/by-nc-nd/3.0/es/88x31.png" alt="CC License"
+                style="margin-bottom: 1rem;">
+            <p>Esta obra está sujeta a una licencia de <strong>Reconocimiento-NoComercial-SinObraDerivada 3.0
+                    España</strong> de Creative Commons</p>
+        </div>
+    </div>
+
+    <!-- FICHA DEL TRABAJO FINAL -->
+    <div class="legal-section">
+        <h2 style="text-align: center; color: var(--uoc-dark); border: none;">FICHA DEL TRABAJO FINAL</h2>
+        <table>
+            <tr>
+                <td style="background: #f0f0f0; width: 30%;"><strong>Título del trabajo:</strong></td>
+                <td>Plataforma Web para Organización de Eventos de Running (RunTogether)</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Nombre del autor:</strong></td>
+                <td>Eduard Berlanga González</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Nombre del consultor/a:</strong></td>
+                <td>Mikel Zorrilla Berasategui</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Nombre del PRA:</strong></td>
+                <td>[Nombre del PRA]</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Fecha de entrega:</strong></td>
+                <td>12/2025</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Titulación o programa:</strong></td>
+                <td>Técnicas de Interacción Digital y Multimedia</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Área del Trabajo Final:</strong></td>
+                <td>Programación Web</td>
+            </tr>
+            <tr>
+                <td style="background: #f0f0f0;"><strong>Idioma del trabajo:</strong></td>
+                <td>Castellano</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h1>ÍNDICE</h1>
+            <ol>
+                <li><strong>1. Introducción</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>1.1. Contexto y justificación del Trabajo</li>
+                        <li>1.2. Objetivos del Trabajo (PEC 4)</li>
+                        <li>1.3. Impacto en sostenibilidad, ético-social y de diversidad</li>
+                        <li>1.4. Enfoque y método seguido</li>
+                        <li>1.5. Planificación del Trabajo</li>
+                    </ol>
+                </li>
+                <li><strong>2. Materiales y métodos</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>2.1. Stack Tecnológico Completo</li>
+                        <li>2.2. Arquitectura de Despliegue (Cloud)</li>
+                        <li>2.3. Configuración de Base de Datos en Producción</li>
+                        <li>2.4. Estrategia de CI/CD</li>
+                        <li>2.5. Mejoras Finales Implementadas</li>
+                    </ol>
+                </li>
+                <li><strong>3. Resultados</strong>
+                    <ol style="list-style-type: none; margin-left: 1rem;">
+                        <li>3.1. Aplicación Desplegada y Funcional</li>
+                        <li>3.2. Filtrado Avanzado en Servidor</li>
+                        <li>3.3. Gestión de Errores y Fallbacks</li>
+                        <li>3.4. Pruebas de Integración y Validaciones</li>
+                    </ol>
+                </li>
+                <li><strong>4. Conclusiones y trabajos futuros</strong></li>
+                <li><strong>5. Glosario</strong></li>
+                <li><strong>6. Bibliografía</strong></li>
+                <li><strong>7. Anexos</strong></li>
+            </ol>
+        </div>
+
+        <!-- 1. INTRODUCCIÓN -->
+        <div class="section">
+            <h1>1. INTRODUCCIÓN</h1>
+
+            <h2>1.1. Contexto y justificación del Trabajo</h2>
+            <p>RunTogether ha evolucionado desde una API básica hasta una aplicación web completa. En esta fase final
+                (PEC 4), el foco se ha puesto en la <strong>profesionalización del código</strong>, la optimización del
+                rendimiento mediante filtrado en servidor y, crucialmente, el <strong>despliegue en un entorno de
+                    producción real</strong>. Esto cierra el ciclo de desarrollo de software, llevando el producto desde
+                el entorno local hasta el usuario final.</p>
+
+            <h2>1.2. Objetivos del Trabajo (PEC 4)</h2>
+            <p>Los objetivos específicos alcanzados en esta entrega son:</p>
+            <ul>
+                <li>Desplegar el backend en Render y conectar con MongoDB Atlas.</li>
+                <li>Desplegar el frontend en Netlify asegurando la comunicación segura con la API.</li>
+                <li>Implementar filtrado avanzado en el servidor para mejorar la escalabilidad.</li>
+                <li>Refinar la interfaz de usuario con manejo de errores (imágenes rotas) y feedback visual.</li>
+                <li>Asegurar la integridad de datos mediante el uso estricto de Enums y validaciones de esquema.</li>
+            </ul>
+
+            <h2>1.3. Impacto y enfoque</h2>
+            <p>El proyecto final demuestra cómo una arquitectura moderna (MERN + Prisma) puede ser desplegada de manera
+                eficiente y sostenible, utilizando servicios en la nube que escalan según la demanda.</p>
+        </div>
+
+        <!-- 2. MATERIALES Y MÉTODOS -->
+        <div class="section">
+            <h1>2. MATERIALES Y MÉTODOS</h1>
+
+            <h2>2.1. Stack Tecnológico Completo</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
+                        alt="MongoDB">
+                    <p>MongoDB Atlas</p>
+                    <small>Base de Datos Cloud</small>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"
+                        alt="Express">
+                    <p>Express.js</p>
+                    <small>Backend Framework</small>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                    <p>React</p>
+                    <small>Frontend Library</small>
+                </div>
+                <div class="tech-item">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node">
+                    <p>Node.js</p>
+                    <small>Runtime</small>
+                </div>
+            </div>
+
+            <h2>2.2. Arquitectura de Despliegue (Cloud)</h2>
+            <p>La aplicación opera en un entorno distribuido:</p>
+            <div class="info-box">
+                <ul>
+                    <li><strong>Frontend (Netlify):</strong> Sirve los archivos estáticos (JS, CSS, HTML) a través de
+                        una CDN global. Gestiona las rutas del lado del cliente (SPA).</li>
+                    <li><strong>Backend (Render):</strong> Ejecuta el servidor Node.js en un contenedor. Se reinicia
+                        automáticamente ante fallos y gestiona las variables de entorno de forma segura.</li>
+                    <li><strong>Base de Datos (Atlas):</strong> Clúster de MongoDB gestionado, con copias de seguridad
+                        automáticas y acceso restringido por IP (si se configurase whitelist).</li>
+                </ul>
+            </div>
+
+            <h2>2.3. Configuración de Base de Datos en Producción</h2>
+            <p>Se ha utilizado <strong>Prisma ORM</strong> para definir el esquema de datos. A diferencia de Mongoose,
+                Prisma genera un cliente con tipos seguros basado en el esquema <code>schema.prisma</code>.</p>
+            <div class="code-block">
+                // Ejemplo de definición de Enum en schema.prisma
+                enum Difficulty {
+                BEGINNER
+                INTERMEDIATE
+                ADVANCED
+                }
+
+                model Event {
+                id String @id @default(auto()) @map("_id") @db.ObjectId
+                difficulty Difficulty @default(BEGINNER)
+                // ... otros campos
+                }
+            </div>
+            <p>Para la puesta en producción, se ejecutó un script de <strong>Seeding</strong>
+                (<code>seed_final.js</code>) que limpió los datos de prueba antiguos y pobló la base de datos con
+                eventos reales y usuarios administradores, asegurando que las imágenes y los tipos de datos (Enums)
+                fueran correctos.</p>
+
+            <h2>2.4. Estrategia de CI/CD</h2>
+            <p>El despliegue es continuo. Cada commit en la rama <code>main</code> de GitHub dispara:</p>
+            <ol>
+                <li><strong>Build en Netlify:</strong> Compila el proyecto React con Vite.</li>
+                <li><strong>Deploy en Render:</strong> Instala dependencias, genera el cliente Prisma y reinicia el
+                    servicio web.</li>
+            </ol>
+
+            <h2>2.5. Mejoras Finales Implementadas</h2>
+            <p>En esta última iteración se han añadido:</p>
+            <ul>
+                <li><strong>Server-Side Filtering:</strong> Los filtros de búsqueda ahora se procesan en el backend,
+                    reduciendo la carga de datos transferidos.</li>
+                <li><strong>Image Error Handling:</strong> Un sistema robusto que detecta si una imagen falla al cargar
+                    y la sustituye por un placeholder elegante.</li>
+                <li><strong>Security Cleanup:</strong> Eliminación de credenciales hardcodeadas y limpieza de scripts de
+                    prueba inseguros.</li>
+            </ul>
+        </div>
+
+        <!-- 3. RESULTADOS -->
+        <div class="section">
+            <h1>3. RESULTADOS</h1>
+
+            <h2>3.1. Aplicación Desplegada y Funcional</h2>
+            <p>La aplicación es accesible públicamente y totalmente funcional. Los usuarios pueden registrarse, iniciar
+                sesión, ver eventos y gestionar su perfil.</p>
+            <div class="info-box">
+                <p><strong>URL Frontend:</strong> <a
+                        href="https://runtogether-frontend.netlify.app">https://runtogether-frontend.netlify.app</a>
+                    (Simulado)</p>
+                <p><strong>URL Backend:</strong> <a
+                        href="https://runtogether-backend.onrender.com">https://runtogether-backend.onrender.com</a>
+                    (Simulado)</p>
+            </div>
+
+            <h2>3.2. Filtrado Avanzado en Servidor</h2>
+            <p>La implementación del filtrado en el backend permite realizar consultas complejas de manera eficiente.
+                Por ejemplo, buscar eventos "INTERMEDIATE" en "Madrid" devuelve solo los registros coincidentes desde la
+                base de datos.</p>
+            <div class="code-block">
+                GET /api/events?difficulty=INTERMEDIATE&location=Madrid
+
+                // Respuesta (200 OK)
+                [
+                {
+                "title": "San Silvestre Vallecana",
+                "difficulty": "INTERMEDIATE",
+                "location": "Madrid, España",
+                ...
+                }
+                ]
+            </div>
+
+            <h2>3.3. Gestión de Errores y Fallbacks</h2>
+            <p>Se ha verificado que, incluso si una imagen externa deja de estar disponible, la interfaz no se rompe. El
+                usuario ve una imagen genérica ("Imagen No Disponible") manteniendo la estética del sitio.</p>
+
+            <h2>3.4. Pruebas de Integración</h2>
+            <p>Se han validado los flujos críticos:</p>
+            <ul>
+                <li><strong>Registro -> Login -> Inscripción:</strong> Funciona correctamente, actualizando el estado
+                    del botón de inscripción en tiempo real.</li>
+                <li><strong>Perfil de Usuario:</strong> Muestra correctamente el historial de eventos y permite
+                    actualizar la foto de perfil.</li>
+                <li><strong>Admin Dashboard:</strong> Permite crear nuevos eventos que aparecen inmediatamente en la
+                    Home.</li>
+            </ul>
+        </div>
+
+        <!-- 4. CONCLUSIONES -->
+        <div class="section">
+            <h1>4. CONCLUSIONES Y TRABAJOS FUTUROS</h1>
+            <p>El proyecto RunTogether ha alcanzado un nivel de madurez técnica que permite su uso en producción. La
+                combinación de React para una experiencia de usuario fluida y un backend Node.js/Prisma robusto ha
+                demostrado ser una elección arquitectónica acertada.</p>
+            <p>Como líneas futuras de trabajo, se propone:</p>
+            <ul>
+                <li>Implementar pasarela de pagos real (Stripe).</li>
+                <li>Añadir notificaciones push en tiempo real (WebSockets).</li>
+                <li>Desarrollar una aplicación móvil nativa (React Native) reutilizando la misma API.</li>
+            </ul>
+        </div>
+
+        <!-- 7. ANEXOS -->
+        <div class="section">
+            <h1>7. ANEXOS</h1>
+            <h2>Anexo I: Enlaces al Repositorio</h2>
+            <p>El código fuente completo está disponible en GitHub:</p>
+            <p><a href="https://github.com/eduuber777/runtogether">https://github.com/eduuber777/runtogether</a></p>
+        </div>
+
+    </div>
+</body>
+
+</html>

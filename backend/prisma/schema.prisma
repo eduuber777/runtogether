@@ -10,12 +10,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  RUNNER
+}
+
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum Terrain {
+  TRAIL
+  ASPHALT
+  MIXED
+}
+
+enum Level {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
 model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   email     String   @unique
   password  String
   name      String
-  role      String   @default("RUNNER") // "ADMIN" or "RUNNER"
+  role      Role     @default(RUNNER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -24,9 +47,11 @@ model User {
   posts        Post[]
   notifications Notification[]
 
-  level        String?  // "BEGINNER", "INTERMEDIATE", "ADVANCED"
+  level        Level?
   photoUrl     String?
   preferences  Json?
+  
+  @@map("users_v2")
 }
 
 model Event {
@@ -39,17 +64,18 @@ model Event {
   price       Float
   imageUrl    String?
   
-  // Nuevos campos
-  difficulty      String? // "BEGINNER", "INTERMEDIATE", "ADVANCED"
+  difficulty      Difficulty @default(BEGINNER)
   maxParticipants Int?
   elevation       Float?  // desnivel en metros
-  terrainType     String? // "TRAIL", "ASPHALT", "MIXED"
+  terrainType     Terrain?
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   inscriptions Inscription[]
   comments     Comment[]
+  
+  @@map("events_v2")
 }
 
 model Inscription {
@@ -63,6 +89,7 @@ model Inscription {
   event Event @relation(fields: [eventId], references: [id])
 
   @@unique([userId, eventId])
+  @@map("inscriptions_v2")
 }
 
 model Comment {
@@ -76,6 +103,8 @@ model Comment {
   user  User   @relation(fields: [userId], references: [id])
   event Event? @relation(fields: [eventId], references: [id])
   post  Post?  @relation(fields: [postId], references: [id])
+  
+  @@map("comments_v2")
 }
 
 model Post {
@@ -88,6 +117,8 @@ model Post {
 
   user     User      @relation(fields: [userId], references: [id])
   comments Comment[]
+  
+  @@map("posts_v2")
 }
 
 model Notification {
@@ -99,4 +130,6 @@ model Notification {
   createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id])
+  
+  @@map("notifications_v2")
 }

@@ -1,4 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient, Difficulty, Terrain } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
@@ -20,18 +20,19 @@ async function main() {
         console.log('Nota: No se pudieron actualizar usuarios (quizás no existen), continuando...');
     }
 
-    // 2. Borrar eventos antiguos (para limpiar la home)
+    // 2. Borrar datos antiguos (Limpieza total)
     try {
-        console.log('Borrando eventos antiguos...');
-        // Borramos todos los eventos. Si hay inscripciones, esto podría fallar si no hay borrado en cascada,
-        // pero en Mongo con Prisma suele funcionar si la relación es opcional.
-        // Si falla, lo ignoramos y creamos los nuevos igual.
+        console.log('Borrando datos antiguos...');
+        // Borrar inscripciones primero para evitar errores de integridad
+        await prisma.inscription.deleteMany({});
+        await prisma.comment.deleteMany({}); // También comentarios
         await prisma.event.deleteMany({});
+        console.log('Datos antiguos eliminados correctamente.');
     } catch (e) {
-        console.log('Nota: No se pudieron borrar eventos antiguos, se añadirán los nuevos.');
+        console.log('Nota: Error al limpiar datos antiguos (continuando...):', e.message);
     }
 
-    // 3. Crear Eventos Nuevos (Gratis y con fotos buenas)
+    // 3. Crear Eventos Nuevos (Gratis y con fotos personalizadas)
     const events = [
         {
             title: 'Maratón de Barcelona 2025',
@@ -40,11 +41,11 @@ async function main() {
             location: 'Barcelona, España',
             distance: 42.195,
             price: 0,
-            difficulty: 'ADVANCED',
-            imageUrl: 'https://images.unsplash.com/photo-1532444458054-01a7dd3e9fca?auto=format&fit=crop&w=1000&q=80',
+            difficulty: Difficulty.ADVANCED,
+            imageUrl: '/images/events/barcelona-marathon.png',
             maxParticipants: 5000,
             elevation: 150,
-            terrainType: 'ASPHALT'
+            terrainType: Terrain.ASPHALT
         },
         {
             title: 'Trail Collserola 10K',
@@ -53,11 +54,11 @@ async function main() {
             location: 'Sant Cugat, España',
             distance: 10.0,
             price: 0,
-            difficulty: 'BEGINNER',
-            imageUrl: 'https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=1000&q=80',
+            difficulty: Difficulty.BEGINNER,
+            imageUrl: '/images/events/trail-collserola.png',
             maxParticipants: 300,
             elevation: 350,
-            terrainType: 'TRAIL'
+            terrainType: Terrain.TRAIL
         },
         {
             title: 'San Silvestre Vallecana',
@@ -66,11 +67,11 @@ async function main() {
             location: 'Madrid, España',
             distance: 10.0,
             price: 0,
-            difficulty: 'INTERMEDIATE',
-            imageUrl: 'https://images.unsplash.com/photo-1513593771513-6568e754be37?auto=format&fit=crop&w=1000&q=80',
+            difficulty: Difficulty.INTERMEDIATE,
+            imageUrl: '/images/events/san-silvestre.png',
             maxParticipants: 2000,
             elevation: 50,
-            terrainType: 'ASPHALT'
+            terrainType: Terrain.ASPHALT
         },
         {
             title: 'Ultra Pirineu XS',
@@ -79,11 +80,11 @@ async function main() {
             location: 'Bagà, España',
             distance: 25.0,
             price: 0,
-            difficulty: 'ADVANCED',
-            imageUrl: 'https://images.unsplash.com/photo-1506197061617-7f5c0b093236?auto=format&fit=crop&w=1000&q=80',
+            difficulty: Difficulty.ADVANCED,
+            imageUrl: '/images/events/ultra-pirineu.png',
             maxParticipants: 150,
             elevation: 1200,
-            terrainType: 'TRAIL'
+            terrainType: Terrain.TRAIL
         },
         {
             title: 'Carrera de la Mujer',
@@ -92,11 +93,11 @@ async function main() {
             location: 'Valencia, España',
             distance: 5.0,
             price: 0,
-            difficulty: 'BEGINNER',
-            imageUrl: 'https://images.unsplash.com/photo-1552674605-5d28c4a14c2c?auto=format&fit=crop&w=1000&q=80',
+            difficulty: Difficulty.BEGINNER,
+            imageUrl: '/images/events/carrera-mujer.png',
             maxParticipants: 1000,
             elevation: 10,
-            terrainType: 'ASPHALT'
+            terrainType: Terrain.ASPHALT
         }
     ];
 
@@ -110,7 +111,8 @@ async function main() {
 
 main()
     .catch((e) => {
-        console.error('ERROR:', e);
+        console.error('ERROR:', JSON.stringify(e, null, 2));
+        console.error(e);
     })
     .finally(async () => {
         await prisma.$disconnect();

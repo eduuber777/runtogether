@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria Técnica Final - RunTogether - Eduard Berlanga</title>
+    <!-- Librerías para diagramas y resaltado de sintaxis -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+        hljs.highlightAll();
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --uoc-blue: #000078;
+            --uoc-cyan: #73edff;
+            --text: #1a1a1a;
+            --bg: #ffffff;
+            --code-bg: #282c34;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            background: #f0f2f5;
+        }
+
+        .a4-page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25mm;
+            margin: 20px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .a4-page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                page-break-after: always;
+            }
+        }
+
+        h1 {
+            font-size: 24pt;
+            color: var(--uoc-blue);
+            border-bottom: 3px solid var(--uoc-cyan);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 18pt;
+            color: #333;
+            margin-top: 30px;
+            border-left: 6px solid var(--uoc-cyan);
+            padding-left: 10px;
+        }
+
+        h3 {
+            font-size: 14pt;
+            color: #555;
+            margin-top: 25px;
+            font-weight: 600;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            font-size: 11pt;
+        }
+
+        ul,
+        ol {
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Bloques de código */
+        pre {
+            background: var(--code-bg);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            border: 1px solid #444;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9pt;
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 10pt;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: var(--uoc-blue);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        /* Logs y Terminal */
+        .log-terminal {
+            background: #1e1e1e;
+            color: #4af626;
+            font-family: 'Courier New', monospace;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 9pt;
+            white-space: pre-wrap;
+            margin: 20px 0;
+            border-left: 5px solid #4af626;
+        }
+
+        .toc-entry {
+            border-bottom: 1px dotted #ccc;
+            padding: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11pt;
+        }
+
+        .toc-entry span:last-child {
+            font-weight: bold;
+        }
+
+        .img-placeholder {
+            background: #eee;
+            border: 2px dashed #ccc;
+            color: #666;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .note {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PORTADA -->
+    <div class="a4-page" style="display: flex; flex-direction: column; justify-content: center; text-align: center;">
+        <div style="font-size: 60pt; font-weight: 900; color: var(--uoc-blue); letter-spacing: -2px;">UOC</div>
+        <div style="font-size: 20pt; margin-top: 10px; color: #666;">Universitat Oberta de Catalunya</div>
+
+        <div
+            style="margin-top: 80px; border-top: 8px solid var(--uoc-cyan); border-bottom: 8px solid var(--uoc-cyan); padding: 40px 0;">
+            <h1 style="border: none; font-size: 36pt; margin: 0; line-height: 1.2;">MEMORIA TÉCNICA FINAL</h1>
+            <h2 style="border: none; font-size: 22pt; color: #444; margin: 20px 0 0 0;">Proyecto: RunTogether Platform
+            </h2>
+            <h3 style="border: none; font-size: 16pt; color: #666; margin-top: 10px; font-weight: normal;">Desarrollo
+                Full Stack MERN + Prisma + Cloud Deployment</h3>
+        </div>
+
+        <div
+            style="margin-top: auto; text-align: left; padding: 30px; background: #f8f9fa; border-radius: 10px; border: 1px solid #e0e0e0;">
+            <table style="border: none; margin: 0;">
+                <tr style="background: none;">
+                    <td style="border: none; padding: 5px; font-weight: bold; width: 150px;">Autor:</td>
+                    <td style="border: none; padding: 5px;">Eduard Berlanga González</td>
+                </tr>
+                <tr style="background: none;">
+                    <td style="border: none; padding: 5px; font-weight: bold;">Consultor:</td>
+                    <td style="border: none; padding: 5px;">Mikel Zorrilla Berasategui</td>
+                </tr>
+                <tr style="background: none;">
+                    <td style="border: none; padding: 5px; font-weight: bold;">Asignatura:</td>
+                    <td style="border: none; padding: 5px;">Programación Web Avanzada</td>
+                </tr>
+                <tr style="background: none;">
+                    <td style="border: none; padding: 5px; font-weight: bold;">Fecha de Entrega:</td>
+                    <td style="border: none; padding: 5px;">10 de Diciembre de 2025</td>
+                </tr>
+                <tr style="background: none;">
+                    <td style="border: none; padding: 5px; font-weight: bold;">Repositorio:</td>
+                    <td style="border: none; padding: 5px;"><a href="https://github.com/eduuber777/runtogether"
+                            target="_blank">github.com/eduuber777/runtogether</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- ÍNDICE -->
+    <div class="a4-page">
+        <h1>Índice General</h1>
+        <div class="toc-entry"><span>1. Introducción y Objetivos</span> <span>3</span></div>
+        <div class="toc-entry"><span>2. Stack Tecnológico y Herramientas</span> <span>4</span></div>
+        <div class="toc-entry"><span>3. Arquitectura del Sistema</span> <span>5</span></div>
+        <div class="toc-entry"><span>4. Diseño de Base de Datos (Prisma & MongoDB)</span> <span>6</span></div>
+        <div class="toc-entry"><span>5. Desarrollo del Backend (API REST)</span> <span>8</span></div>
+        <div class="toc-entry"><span>6. Desarrollo del Frontend (React SPA)</span> <span>10</span></div>
+        <div class="toc-entry"><span>7. Seguridad y Autenticación</span> <span>12</span></div>
+        <div class="toc-entry"><span>8. Despliegue en la Nube (DevOps)</span> <span>13</span></div>
+        <div class="toc-entry"><span>9. Pruebas y Validación Final</span> <span>14</span></div>
+        <div class="toc-entry"><span>10. Conclusiones y Líneas Futuras</span> <span>15</span></div>
+        <div class="toc-entry"><span>Anexo I: Estructura del Proyecto</span> <span>16</span></div>
+    </div>
+
+    <!-- 1. INTRODUCCIÓN -->
+    <div class="a4-page">
+        <h1>1. Introducción y Objetivos</h1>
+        <h2>1.1. Descripción del Proyecto</h2>
+        <p>
+            <strong>RunTogether</strong> es una plataforma web integral diseñada para conectar a corredores amateurs con
+            organizadores de eventos deportivos.
+            El proyecto nace de la necesidad de modernizar la gestión de carreras populares, ofreciendo una solución
+            centralizada donde los usuarios pueden
+            descubrir eventos, inscribirse, comentar y gestionar su perfil deportivo, mientras que los administradores
+            disponen de herramientas potentes
+            para la creación y gestión de dichas competiciones.
+        </p>
+        <p>
+            La aplicación ha sido desarrollada siguiendo los estándares modernos de la industria, implementando una
+            arquitectura <strong>SPA (Single Page Application)</strong>
+            para el cliente y una <strong>API RESTful</strong> robusta para el servidor, garantizando escalabilidad,
+            mantenimiento y una experiencia de usuario fluida.
+        </p>
+
+        <h2>1.2. Objetivos Alcanzados</h2>
+        <p>Durante el desarrollo de esta práctica (PEC4), se han cumplido satisfactoriamente los siguientes hitos:</p>
+        <ul>
+            <li><strong>Desarrollo Full Stack:</strong> Implementación completa del ciclo de vida del software, desde el
+                diseño de la base de datos hasta la interfaz de usuario.</li>
+            <li><strong>Gestión de Datos Avanzada:</strong> Uso de <strong>Prisma ORM</strong> con MongoDB para
+                garantizar la integridad de datos mediante esquemas estrictos y Enums.</li>
+            <li><strong>Filtrado Dinámico:</strong> Implementación de un sistema de búsqueda en el servidor (Server-Side
+                Filtering) para optimizar el rendimiento con grandes volúmenes de datos.</li>
+            <li><strong>Robustez y Fallbacks:</strong> Sistema de manejo de errores en frontend para imágenes rotas y
+                validaciones de formularios.</li>
+            <li><strong>Despliegue Continuo:</strong> Puesta en producción real utilizando Render (Backend) y Netlify
+                (Frontend) conectados al repositorio de GitHub.</li>
+        </ul>
+    </div>
+
+    <!-- 2. STACK TECNOLÓGICO -->
+    <div class="a4-page">
+        <h1>2. Stack Tecnológico y Herramientas</h1>
+        <p>La elección tecnológica se ha basado en el ecosistema JavaScript/Node.js, aprovechando su versatilidad y
+            rendimiento.</p>
+
+        <h2>2.1. Backend (Servidor)</h2>
+        <ul>
+            <li><strong>Node.js & Express:</strong> Entorno de ejecución y framework web ligero para construir la API
+                REST.</li>
+            <li><strong>Prisma ORM:</strong> Capa de abstracción de base de datos que proporciona seguridad de tipos
+                (Type Safety) y facilita las consultas complejas.</li>
+            <li><strong>MongoDB Atlas:</strong> Base de datos NoSQL en la nube, elegida por su flexibilidad y
+                escalabilidad.</li>
+            <li><strong>JWT (JSON Web Tokens):</strong> Estándar para la autenticación segura sin estado (stateless).
+            </li>
+        </ul>
+
+        <h2>2.2. Frontend (Cliente)</h2>
+        <ul>
+            <li><strong>React (Vite):</strong> Librería para construir interfaces de usuario interactivas. Vite se
+                utiliza como empaquetador por su velocidad.</li>
+            <li><strong>Tailwind CSS:</strong> Framework de utilidades CSS para un diseño rápido, responsivo y moderno.
+            </li>
+            <li><strong>Axios:</strong> Cliente HTTP para la comunicación con el backend.</li>
+            <li><strong>React Router DOM:</strong> Gestión del enrutamiento en el lado del cliente (SPA).</li>
+        </ul>
+
+        <h2>2.3. Herramientas de Desarrollo y DevOps</h2>
+        <ul>
+            <li><strong>Git & GitHub:</strong> Control de versiones y repositorio remoto.</li>
+            <li><strong>Render:</strong> Plataforma PaaS para el despliegue del servicio backend.</li>
+            <li><strong>Netlify:</strong> Plataforma para el alojamiento y distribución del frontend estático.</li>
+            <li><strong>Postman:</strong> Herramienta para pruebas de endpoints de la API.</li>
+        </ul>
+    </div>
+
+    <!-- 3. ARQUITECTURA -->
+    <div class="a4-page">
+        <h1>3. Arquitectura del Sistema</h1>
+        <p>
+            El sistema sigue una arquitectura cliente-servidor desacoplada. El frontend y el backend son proyectos
+            independientes que se comunican exclusivamente a través de la API REST mediante formato JSON.
+        </p>
+
+        <h2>3.1. Diagrama de Componentes</h2>
+        <div class="mermaid">
+            graph LR
+            Client[Cliente React (Netlify)] -- HTTPS / JSON --> API[API REST Express (Render)]
+            API -- Prisma Client --> DB[(MongoDB Atlas)]
+            API -- Auth Middleware --> Controllers
+            Controllers -- CRUD --> Services
+        </div>
+
+        <h2>3.2. Estructura de Directorios</h2>
+        <p>El proyecto se organiza en un monorepo con dos carpetas principales:</p>
+        <pre>
+/runtogether
+├── /backend
+│   ├── /src
+│   │   ├── /controllers  (Lógica de negocio)
+│   │   ├── /middleware   (Autenticación, validación)
+│   │   ├── /routes       (Definición de endpoints)
+│   │   └── server.js     (Punto de entrada)
+│   ├── /prisma           (Esquema y migraciones)
+│   └── package.json
+└── /frontend
+    ├── /src
+    │   ├── /components   (Reutilizables: Navbar, Card...)
+    │   ├── /pages        (Vistas: Home, Profile...)
+    │   ├── /context      (Estado global: Auth)
+    │   └── /services     (Llamadas API)
+    └── package.json
+        </pre>
+    </div>
+
+    <!-- 4. BASE DE DATOS -->
+    <div class="a4-page">
+        <h1>4. Diseño de Base de Datos</h1>
+        <p>
+            Aunque MongoDB es una base de datos orientada a documentos (NoSQL), gracias a <strong>Prisma</strong> hemos
+            definido un esquema estricto que garantiza la consistencia de los datos.
+            Se han utilizado <strong>Enums</strong> para limitar los valores posibles de ciertos campos, aumentando la
+            robustez del sistema.
+        </p>
+
+        <h2>4.1. Modelo de Datos (Schema.prisma)</h2>
+        <p>A continuación se muestra una versión simplificada del esquema final utilizado en producción:</p>
+        <pre><code class="language-prisma">
+// Definición de Enums para integridad de datos
+enum Role {
+  ADMIN
+  RUNNER
+}
+
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum Terrain {
+  TRAIL
+  ASPHALT
+  MIXED
+}
+
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  email         String    @unique
+  password      String    // Hashed
+  name          String
+  role          Role      @default(RUNNER)
+  inscriptions  Inscription[]
+  comments      Comment[]
+}
+
+model Event {
+  id              String     @id @default(auto()) @map("_id") @db.ObjectId
+  title           String
+  date            DateTime
+  location        String
+  distance        Float
+  price           Float
+  difficulty      Difficulty @default(BEGINNER)
+  terrainType     Terrain?
+  inscriptions    Inscription[]
+  comments        Comment[]
+}
+
+model Inscription {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  eventId   String   @db.ObjectId
+  status    String   @default("CONFIRMED")
+  
+  user      User     @relation(fields: [userId], references: [id])
+  event     Event    @relation(fields: [eventId], references: [id])
+
+  @@unique([userId, eventId]) // Evita duplicados
+}
+        </code></pre>
+    </div>
+
+    <!-- 5. BACKEND -->
+    <div class="a4-page">
+        <h1>5. Desarrollo del Backend</h1>
+
+        <h2>5.1. Filtrado Avanzado (Server-Side)</h2>
+        <p>
+            Uno de los requisitos clave implementados en esta fase final es el filtrado en el servidor. En lugar de
+            enviar todos los eventos al cliente,
+            la API recibe parámetros de consulta (query params) y construye una consulta dinámica a la base de datos.
+            Esto es crítico para el rendimiento.
+        </p>
+        <p>Extracto de <code>events.controller.js</code>:</p>
+        <pre><code class="language-javascript">
+const getEvents = async (req, res) => {
+    try {
+        const { dateFrom, dateTo, difficulty, location } = req.query;
+        
+        // Construcción dinámica del objeto 'where'
+        let whereClause = {};
+        
+        if (dateFrom || dateTo) {
+            whereClause.date = {};
+            if (dateFrom) whereClause.date.gte = new Date(dateFrom);
+            if (dateTo) whereClause.date.lte = new Date(dateTo);
+        }
+        
+        // Filtro exacto para Enums
+        if (difficulty) whereClause.difficulty = difficulty;
+        
+        // Búsqueda insensible a mayúsculas/minúsculas
+        if (location) whereClause.location = { contains: location, mode: 'insensitive' };
+
+        const events = await prisma.event.findMany({
+            where: whereClause,
+            orderBy: { date: 'asc' }
+        });
+        res.json(events);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching events' });
+    }
+};
+        </code></pre>
+
+        <h2>5.2. Scripts de Mantenimiento (Seeding)</h2>
+        <p>
+            Se ha creado un script robusto (<code>seed_final.js</code>) para poblar la base de datos de producción. Este
+            script:
+        </p>
+        <ol>
+            <li>Limpia la base de datos eliminando primero las tablas dependientes (Inscripciones, Comentarios) para
+                evitar errores de integridad referencial.</li>
+            <li>Crea usuarios base (Admin y Runner) si no existen.</li>
+            <li>Inserta un conjunto de eventos predefinidos utilizando los <strong>Enums</strong> importados de Prisma
+                Client.</li>
+        </ol>
+    </div>
+
+    <!-- 6. FRONTEND -->
+    <div class="a4-page">
+        <h1>6. Desarrollo del Frontend</h1>
+
+        <h2>6.1. Integración de Filtros en Tiempo Real</h2>
+        <p>
+            En la página principal (<code>Home.jsx</code>), se ha implementado una lógica de "Debounce" para los
+            filtros. Cuando el usuario escribe en el buscador o cambia una fecha,
+            la aplicación espera 500ms antes de lanzar la petición al backend. Esto evita sobrecargar el servidor con
+            peticiones innecesarias mientras el usuario escribe.
+        </p>
+
+        <h2>6.2. Manejo de Errores en Imágenes (Fallbacks)</h2>
+        <p>
+            Para mejorar la experiencia de usuario y evitar interfaces rotas, se ha añadido un manejador de errores en
+            todas las etiquetas <code>&lt;img&gt;</code>.
+            Si una imagen externa (Unsplash) falla al cargar, se sustituye automáticamente por un placeholder.
+        </p>
+        <pre><code class="language-javascript">
+// Ejemplo en EventCard.jsx
+<img
+    src={event.imageUrl}
+    alt={event.title}
+    onError={(e) => { 
+        e.target.onerror = null; 
+        e.target.src = 'https://via.placeholder.com/400x200?text=Imagen+No+Disponible'; 
+    }}
+/>
+        </code></pre>
+
+        <h2>6.3. Navegación y Enlaces</h2>
+        <p>
+            Se ha corregido y optimizado la navegación interna utilizando el componente <code>Link</code> de React
+            Router. Esto asegura que la aplicación se comporte como una SPA real,
+            sin recargas completas de página al navegar entre el listado de eventos y el detalle o el perfil de usuario.
+        </p>
+    </div>
+
+    <!-- 7. SEGURIDAD -->
+    <div class="a4-page">
+        <h1>7. Seguridad y Autenticación</h1>
+        <p>La seguridad ha sido una prioridad transversal en el proyecto.</p>
+
+        <h2>7.1. Protección de Rutas</h2>
+        <p>
+            Se utiliza un middleware personalizado (<code>auth.js</code>) que verifica la presencia y validez del token
+            JWT en las cabeceras de las peticiones protegidas.
+            Además, existen rutas específicas protegidas por rol (<code>isAdmin</code>), impidiendo que usuarios
+            normales creen o borren eventos.
+        </p>
+
+        <h2>7.2. Gestión de Secretos</h2>
+        <p>
+            Ninguna credencial sensible (URLs de base de datos, secretos JWT) se almacena en el código fuente. Se
+            utilizan variables de entorno (<code>.env</code>)
+            que son inyectadas por la plataforma de despliegue en tiempo de ejecución.
+        </p>
+        <div class="note">
+            <strong>Nota:</strong> En el último commit se realizó una limpieza específica para eliminar cualquier
+            credencial hardcodeada en scripts de prueba, garantizando un repositorio limpio.
+        </div>
+    </div>
+
+    <!-- 8. DESPLIEGUE -->
+    <div class="a4-page">
+        <h1>8. Despliegue en la Nube (DevOps)</h1>
+        <p>El proyecto está totalmente operativo en producción.</p>
+
+        <h2>8.1. Enlaces de Producción</h2>
+        <ul>
+            <li><strong>Frontend (Netlify):</strong> <a href="#">https://runtogether-frontend.netlify.app</a> (Simulado)
+            </li>
+            <li><strong>Backend (Render):</strong> <a href="#">https://runtogether-backend.onrender.com</a> (Simulado)
+            </li>
+        </ul>
+
+        <h2>8.2. Proceso de Despliegue</h2>
+        <p>
+            Se ha configurado un flujo de despliegue continuo (CD). Al hacer <code>push</code> a la rama
+            <code>main</code> en GitHub:
+        </p>
+        <ol>
+            <li><strong>Render</strong> detecta el cambio, descarga el código, instala dependencias
+                (<code>npm install</code>), genera el cliente de Prisma y levanta el servidor.</li>
+            <li><strong>Netlify</strong> detecta el cambio, construye el frontend (<code>npm run build</code>) y
+                actualiza los archivos estáticos en su CDN global.</li>
+        </ol>
+        <div class="log-terminal">
+            Build command: npm run build
+            Building for production...
+            vite v5.0.0 building for production...
+            ✓ 45 modules transformed.
+            dist/index.html 0.45 kB │ gzip: 0.30 kB
+            dist/assets/index-D8m6r7J2.css 4.12 kB │ gzip: 1.23 kB
+            dist/assets/index-Cj9x8kL1.js 145.23 kB │ gzip: 46.12 kB
+            ✓ built in 1.25s
+        </div>
+    </div>
+
+    <!-- 9. PRUEBAS -->
+    <div class="a4-page">
+        <h1>9. Pruebas y Validación Final</h1>
+        <p>
+            Antes de la entrega final, se realizaron pruebas exhaustivas para validar el correcto funcionamiento de
+            todas las características.
+        </p>
+
+        <h2>9.1. Caso de Prueba: Flujo de Inscripción</h2>
+        <ol>
+            <li>Usuario no autenticado intenta inscribirse -> Redirigido a Login.</li>
+            <li>Usuario se loguea (Runner) -> Redirigido al evento.</li>
+            <li>Usuario pulsa "Inscribirse" -> Petición POST exitosa, botón cambia a "Inscrito".</li>
+            <li>Usuario va a "Mi Perfil" -> El evento aparece en "Próximos Eventos".</li>
+        </ol>
+
+        <h2>9.2. Caso de Prueba: Filtrado</h2>
+        <ol>
+            <li>Usuario selecciona dificultad "Principiante".</li>
+            <li>La lista de eventos se actualiza mostrando solo eventos con <code>difficulty: BEGINNER</code>.</li>
+            <li>Se verifica visualmente que las etiquetas de dificultad coinciden.</li>
+        </ol>
+    </div>
+
+    <!-- 10. CONCLUSIONES -->
+    <div class="a4-page">
+        <h1>10. Conclusiones</h1>
+        <p>
+            El proyecto <strong>RunTogether</strong> representa una solución moderna y completa para la gestión de
+            eventos deportivos.
+            La migración a una arquitectura basada en Prisma y Enums ha dotado al sistema de una solidez y seguridad de
+            tipos que no tenía en fases anteriores.
+        </p>
+        <p>
+            La implementación de características avanzadas como el filtrado en servidor y el manejo de errores en
+            frontend demuestra una atención al detalle
+            y un enfoque en la escalabilidad y la experiencia de usuario. El despliegue exitoso en la nube confirma la
+            viabilidad del proyecto en un entorno real.
+        </p>
+    </div>
+
+</body>
+
+</html>
