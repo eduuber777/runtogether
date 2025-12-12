@@ -105,4 +105,47 @@ const seedDatabase = async (req, res) => {
     }
 };
 
-module.exports = { seedDatabase };
+// Endpoint para arreglar imágenes de eventos (solo admin)
+const fixEventImages = async (req, res) => {
+    try {
+        const imageMap = {
+            'Maratón de Barcelona 2025': 'https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=1200&h=600&fit=crop&q=80',
+            'Trail Collserola 10K': 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&h=600&fit=crop&q=80',
+            'San Silvestre Vallecana': 'https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=1200&h=600&fit=crop&q=80',
+            'Ultra Pirineu XS': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=600&fit=crop&q=80',
+            'Carrera de la Mujer': 'https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=1200&h=600&fit=crop&q=80'
+        };
+
+        let updated = 0;
+        const results = [];
+
+        for (const [title, imageUrl] of Object.entries(imageMap)) {
+            const result = await prisma.event.updateMany({
+                where: { title },
+                data: { imageUrl }
+            });
+
+            if (result.count > 0) {
+                updated += result.count;
+                results.push({ title, updated: result.count });
+            }
+        }
+
+        res.json({
+            success: true,
+            message: `Se actualizaron ${updated} evento(s)`,
+            eventsUpdated: updated,
+            details: results
+        });
+
+    } catch (error) {
+        console.error('Error al actualizar imágenes:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error al actualizar las imágenes',
+            error: error.message
+        });
+    }
+};
+
+module.exports = { seedDatabase, fixEventImages };

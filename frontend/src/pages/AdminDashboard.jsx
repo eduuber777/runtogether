@@ -115,6 +115,18 @@ const AdminDashboard = () => {
         }
     };
 
+    const handleFixImages = async () => {
+        if (!window.confirm('¿Actualizar las imágenes de todos los eventos?')) return;
+
+        try {
+            const { data } = await api.post('/seed/fix-images');
+            toast.success(data.message);
+            fetchData(); // Refresh data
+        } catch (error) {
+            toast.error(error.response?.data?.message || 'Error al actualizar imágenes');
+        }
+    };
+
     if (user?.role !== 'ADMIN') {
         return (
             <div className="text-center py-10">
@@ -257,14 +269,23 @@ const AdminDashboard = () => {
             {/* Events Management */}
             {activeTab === 'events' && (
                 <div className="space-y-6">
-                    <div className="flex justify-between items-center">
-                        <Button
-                            onClick={handleSeedDatabase}
-                            variant="secondary"
-                            className="bg-green-500 hover:bg-green-600 text-white"
-                        >
-                            🌱 Poblar Base de Datos
-                        </Button>
+                    <div className="flex justify-between items-center gap-2 flex-wrap">
+                        <div className="flex gap-2">
+                            <Button
+                                onClick={handleSeedDatabase}
+                                variant="secondary"
+                                className="bg-green-500 hover:bg-green-600 text-white"
+                            >
+                                🌱 Poblar Base de Datos
+                            </Button>
+                            <Button
+                                onClick={handleFixImages}
+                                variant="secondary"
+                                className="bg-blue-500 hover:bg-blue-600 text-white"
+                            >
+                                📸 Arreglar Imágenes
+                            </Button>
+                        </div>
                         <Button onClick={() => setShowEventModal(true)}>
                             + Nuevo Evento
                         </Button>
