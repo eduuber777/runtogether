@@ -13,6 +13,7 @@ const commentsRoutes = require('./routes/comments.routes');
 const postsRoutes = require('./routes/posts.routes');
 const notificationsRoutes = require('./routes/notifications.routes');
 const seedRoutes = require('./routes/seed.routes');
+const setupRoutes = require('./routes/setup.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -33,6 +34,7 @@ app.use('/api/comments', commentsRoutes);
 app.use('/api/posts', postsRoutes);
 app.use('/api/notifications', notificationsRoutes);
 app.use('/api/seed', seedRoutes);
+app.use('/api/setup', setupRoutes);
 
 // Health Check
 app.get('/', (req, res) => {
