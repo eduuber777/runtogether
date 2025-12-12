@@ -32,7 +32,7 @@ async function main() {
         console.log('Nota: Error al limpiar datos antiguos (continuando...):', e.message);
     }
 
-    // 3. Crear Eventos Nuevos (Gratis y con fotos personalizadas)
+    // 3. Crear Eventos Nuevos (Gratis y con fotos de alta calidad)
     const events = [
         {
             title: 'Maratón de Barcelona 2025',
@@ -42,7 +42,7 @@ async function main() {
             distance: 42.195,
             price: 0,
             difficulty: Difficulty.ADVANCED,
-            imageUrl: '/images/events/barcelona-marathon.png',
+            imageUrl: 'https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=1200&h=600&fit=crop&q=80',
             maxParticipants: 5000,
             elevation: 150,
             terrainType: Terrain.ASPHALT
@@ -55,7 +55,7 @@ async function main() {
             distance: 10.0,
             price: 0,
             difficulty: Difficulty.BEGINNER,
-            imageUrl: '/images/events/trail-collserola.png',
+            imageUrl: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&h=600&fit=crop&q=80',
             maxParticipants: 300,
             elevation: 350,
             terrainType: Terrain.TRAIL
@@ -68,7 +68,7 @@ async function main() {
             distance: 10.0,
             price: 0,
             difficulty: Difficulty.INTERMEDIATE,
-            imageUrl: '/images/events/san-silvestre.png',
+            imageUrl: 'https://images.unsplash.com/photo-1513593771513-7b58b6c4af38?w=1200&h=600&fit=crop&q=80',
             maxParticipants: 2000,
             elevation: 50,
             terrainType: Terrain.ASPHALT
@@ -81,7 +81,7 @@ async function main() {
             distance: 25.0,
             price: 0,
             difficulty: Difficulty.ADVANCED,
-            imageUrl: '/images/events/ultra-pirineu.png',
+            imageUrl: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=600&fit=crop&q=80',
             maxParticipants: 150,
             elevation: 1200,
             terrainType: Terrain.TRAIL
@@ -94,7 +94,7 @@ async function main() {
             distance: 5.0,
             price: 0,
             difficulty: Difficulty.BEGINNER,
-            imageUrl: '/images/events/carrera-mujer.png',
+            imageUrl: 'https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=1200&h=600&fit=crop&q=80',
             maxParticipants: 1000,
             elevation: 10,
             terrainType: Terrain.ASPHALT
